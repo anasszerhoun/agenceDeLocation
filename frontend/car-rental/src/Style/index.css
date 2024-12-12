@@ -1,13 +1,509 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+/*
+#root{
+  margin-top: 20px;
+}
+.personal-informations{
+  background-color: #FB6D48;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+.input-field label {
+  font-weight: 500;
+  color: #495057;
+}
+
+.input-field input,
+.input-field select {
+  height: 50px;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-field input:focus,
+.input-field select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+.title{
+  color: #000000b0;
+  font-weight: bold;
+}
+.informations-vehicule{
+  margin-top: 2vh;
+  padding: 20px;
+}
+
+.addVehicule-title{
+  padding: 20px;
+}
+.container {
+  max-width: 800px;
+  margin: auto;
+  background-color: #fdfdfd;
+}
+/* .detail{
+  display: inline;
+}
+.detail .icons{
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+}
+.detail .title{
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.detail .content{
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+}
+ 
+ .personal-informations {
+  background-color: #f9f9f9; 
+  background: linear-gradient(to right,#1a2a6c,#143f76,#339a8a);
+  background:linear-gradient(to right,#000046,#1CB5E0);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+}
+.photo-profil{
+  position: relative;
+  bottom: 30px;
+}
+.photo-profil span i{
+    color: white;
+    font-size: 12rem;
+    position: relative;
+    left: 50px;
+}
+.photo-profil span h4{
+    color: white;
+    text-align: center;
+    position: relative;
+    left: 12px;
+    bottom: 15px;
+}
+.personal-informations h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+}
+.data{
+  position: relative;
+  top: 15px;
+}
+.edit-button{
+  padding: 6px;
+  width: 20px;
+  position: relative;
+  bottom: 35px;
+  font-size: 1.2rem;
+  width: auto;
+  text-align: start;
+}
+.edit-icon{
+  position: relative;
+  z-index: 99;
+  left: 70px;
+}
+.edit-icon i{
+  color: white;
+  font-size: 1.5rem;
+}
+.detail {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  float: right;
+  transition: background-color 0.2s;
+}
+
+
+.detail:hover {
+  background-color: #f0f8ff;
+}
+
+.detail .icons {
+  font-size: 1.5rem;
+  color: #007bff;
+}
+
+.detail .title h4 {
+  font-size: 1rem;
+  margin: 0;
+  color: #333;
+}
+
+.detail .content h6 {
+  margin: 0;
+  font-weight: normal;
+  color: #666;
+}
+.detail-first {
+  float: right;
+}
+.detail-last{
+  float: left;
+  width: 90%;
+  margin-left: 5%;
+}
+.margin{
+  margin-left: 7%;
+}
+/* .historique-list{
+  box-shadow: 3px 4px 2px   #66666640;
+}
+.search-bar{
+  position: absolute;
+  width: 100%;
+  padding-top: 28px;
+  padding-left: 8px;
+}
+.search-bar input{
+  width: 18%;
+  height: 40px;
+  border-radius: 20px;
+  padding-left:30px;
+}
+.search-bar i{
+  font: 1em sans-serif;
+  color: #007bff;
+  position: absolute;
+  left: 15px;
+  margin-top: 12px;
+}
+.result-historique{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.text-secondary{
+  color: #d3d9de20;
+  font-weight: 300;
+}
+ 
+ .historique-list {
+  background: linear-gradient(to top,#b21f1f,#1a2a6c,#fdbb2d);
+  background: linear-gradient(to right,#1a2a6c,#143f76,#339a8a);
+  overflow-y: auto; 
+  padding-right: 10px;
+  scrollbar-width: thin; 
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  width: 100%;
+  max-width: 400px;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding-left: 40px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.search-bar input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.search-bar i {
+  position: absolute;
+  left: 15px;
+  color: #007bff;
+  font-size: 1.2rem;
+}
+
+.result-historique {
+  
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+  height: 100%;
+}
+
+
+.text-secondary {
+  color: #d3d9de;
+  font-weight: 300;
+}
+.reservation-active {
+  background: linear-gradient(to right,#1a2a6c,#143f76,#339a8a);
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.reservation-active h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+.result-historique{
+  position: relative;
+  bottom: 100px;
+}
+.text-secondary {
+  color: #d3d9de;
+}
+
+.text-primary {
+  color: #007bff;
+}
+
+.historique-row{
+  top: 17vh;
+  margin-top: 30px;
+  position: relative;
+  background-color:#007bff1f; 
+  width: 100%;
+  height: 20vh;
+  box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.295);
+  border-radius: 6px;
+}
+.historique-row:last-child{
+  margin-bottom: 60px;
+}
+.date-reservation-debut , .date-reservation-fin{
+  font-weight: bold;
+  padding: 4px;
+  background-color: #3333334e;
+  color: white;
+  position: relative;
+  text-align: center;
+}
+.date-reservation-debut{
+  border-radius: 10px 0 10px 0;
+  left: 11px;
+}
+.date-reservation-fin{
+  border-radius: 0 10px 0 10px;
+  right: 11px;
+}
+.to{
+  font-size: 1.3rem;
+  color: white;
+  text-align: center;
+}
+.h-65{
+  height: 65vh;
+}
+.h-35{
+  height: 35vh;
+}
+.list-active{
+  margin-top: 40px;
+  margin-left: 40px;
+  width: 90%;
+  height: 150px;
+  background-color: #3333335e;
+  border-radius: 10px;
+}
+.list-active .photo{
+  width: 24%;
+  height: 150px;
+  border-radius: 10px 0 0 10px;
+  z-index: 99;
+}
+ */
+ 
+
+ .cont{
+   /* height: auto; */
+   height: auto;
+   background-color: white;
+   position: relative;
+   top: 40px;
+   border-radius: 20px;
+   box-shadow: 1px 1px 1px 1px gray;
+   padding-bottom: 50px;
+ }
+ .personal-informations-container{
+  height: 90vh;
+ }
+ .personal-informations-container .header{
+  width: 90%;
+  height: 17vh;
+  position: relative;
+  top: 30px;
+  margin-left: 5%;
+  background-color: white;
+ }
+ .header .photo-profile{
+  background-color: rgba(128, 128, 128, 0.219);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+ }
+ .header .profile-name-date{
+  position: relative;
+  top: 20px;
+  left: 10px;
+ }
+ .header .profile-name-date h3{
+  color: black;
+  font-size: 1.8rem;
+ }
+ .header .profile-name-date h4{
+  position: relative;
+  color: gray;
+  font-size: 1.2rem;
+  left: 3px;
+  top: 3px;
+ }
+ .center{
+  position: relative;
+  top: 10px;
+  margin-left: 2%;
+  width: 96%;
+  height: 40vh;
+ }
+ .center .ligne{
+  position: relative;
+  margin-top: 30px;
+  height: 10vh;
+ }
+ .center .addresse{
+  position: relative;
+  margin-top: 30px;
+  height: 10vh;
+ }
+ .center .addresse .val{
+  width: 92.5%;
+ }
+
+ .label{
+  display: block;
+  font-size: 1.1rem;
+  font-weight: bold;
+ }
+ .val{
+  position: relative;
+  cursor: pointer;
+  top: 10px;
+  padding: 10px;
+  display: block;
+  width: 85%;
+  left: 30px;
+  border: 1px solid rgba(128, 128, 128, 0.306);
+  border-radius: 5px;
+}
+.center i{
+  position: relative;
+  top: 10px;
+  left: 15px;
+  text-align: center;
+  font-size: 1.6rem;
+}
+.footer{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  top: 150px;
+  justify-content: space-between;
+}
+.footer .btn-danger{
+  position: relative;
+  right: 80px;
+  padding:15px;
+  font-weight: bold;
+}
+.footer .btn-primary{
+  position: relative;
+  left: 80px;
+  padding:15px;
+  font-weight: bold;
+}
+
+.historique-location{
+  width: 95%;
+  height: auto;
+}
+.historique-location .header{
+  width: 100%;
+  height: 10vh;
+  border-radius: 20px 20px 0 0;
+  padding: 15px;
+}
+.historique-location .header h4{
+  font-size: 2rem;
+  font-weight: bold;
+  position: relative;
+  left: 30px;
+}
+.historique-location .reservation{
+  width: 90%;
+  margin-left: 5%;
+  height: 180px;
+  box-shadow: 1px 1px 1px 1px gray;
+  border-radius: 8px;
+  margin-top: 30px;
+}
+.historique-location .reservation .voiture{
+  width: 180px;
+  height: 180px;
+  border-radius: 8px 0 0 8px;
+}
+.historique-location .reservation .voiture{
+display: flex;
+align-items: center;
+justify-content: center;
+ position: relative;
+  left: 20px;
+ /* top: 40px;  */
+}
+
+.historique-location .reservation .info{
+  width: 70%;
+  height: 180px;
+  border-radius: 0 8px 8px 0;
+  position: relative;
+  left: 40px;
+  top: 50px;
+}
+
+.nom-voiture h2{
+  font-size: 2rem;
+  font-weight: 700;
+} 
+.date{
+  position: relative;
+  left: 15px;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.prix span{
+  position: relative;
+  line-height: 180px;
+  right: 50px;
+  padding: 15px;
+  font-size: 1.3rem;
+  font-weight: bold;
+    background-color: black;
+    color: white;
+    border-radius: 20px 0 20px 0;
 }
