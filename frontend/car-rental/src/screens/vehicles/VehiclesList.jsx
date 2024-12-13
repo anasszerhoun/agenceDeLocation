@@ -5,7 +5,7 @@ import SearchField from '../../components/vehicles/searchField/searchField';
 const TABLE_DATA = [
     {
         id: 100,
-        name: "Iphone 13 Pro",
+        name: "Iphone 16 Pro",
         order_id: 11232,
         date: "Jun 29,2022",
         customer: "Afaq Karim",
@@ -68,7 +68,7 @@ const Vehicles = () => {
                 value.toString().toLowerCase().includes(searchTerm.toLowerCase())
             )
         )
-    }, [TABLE_DATA, searchTerm])
+    }, [searchTerm])
     return <>
 
         <AreaTop PageTitle={"Vehicles"} />

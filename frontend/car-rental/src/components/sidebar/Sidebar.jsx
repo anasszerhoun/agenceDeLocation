@@ -1,32 +1,21 @@
 import { useContext, useEffect, useRef } from "react";
-import { ThemeContext } from "../../context/ThemeContext";
-// import { LIGHT_THEME } from "../../constants/themeConstants";
-// import Logo from "../../assets/images/logo.svg";
+// import { ThemeContext } from "../../context/ThemeContext";
 import {
-  MdCarRental,
-  MdOutlineAttachMoney,
   MdOutlineBarChart,
   MdOutlineClose,
-  MdOutlineCurrencyExchange,
-  MdOutlineElectricCar,
   MdOutlineGridView,
   MdOutlineLogout,
-  MdOutlineMessage,
-  MdOutlinePeople,
   MdOutlineSettings,
-  MdOutlineShoppingBag,
 } from "react-icons/md";
-import { Link } from "react-router-dom";
 import "./Sidebar.scss";
-import { SidebarContext } from "../../context/SidebarContext";
+import { Link } from "react-router-dom";
 import { IoCarSport } from "react-icons/io5";
+import { SidebarContext } from "../../context/SidebarContext";
 
 const Sidebar = ({currentPath}) => {
-  const { theme } = useContext(ThemeContext);
+  // const { theme } = useContext(ThemeContext);
   const { isSidebarOpen, closeSidebar } = useContext(SidebarContext);
   const navbarRef = useRef(null);
-
-  // closing the navbar when clicked outside the sidebar area
   const handleClickOutside = (event) => {
     if (
       navbarRef.current &&
@@ -42,7 +31,8 @@ const Sidebar = ({currentPath}) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   return (
     <nav
