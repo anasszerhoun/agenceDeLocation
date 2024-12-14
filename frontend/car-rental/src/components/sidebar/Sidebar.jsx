@@ -1,9 +1,7 @@
 import { useContext, useEffect, useRef } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
-// import { LIGHT_THEME } from "../../constants/themeConstants";
-// import Logo from "../../assets/images/logo.svg";
+import { SidebarContext } from "../../context/SidebarContext";
 import {
-  MdCarRental,
   MdOutlineAttachMoney,
   MdOutlineBarChart,
   MdOutlineClose,
@@ -16,22 +14,20 @@ import {
   MdOutlineSettings,
   MdOutlineShoppingBag,
 } from "react-icons/md";
+import { IoCarSport } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import "./Sidebar.scss";
-import { SidebarContext } from "../../context/SidebarContext";
-import { IoCarSport } from "react-icons/io5";
 
-const Sidebar = ({currentPath}) => {
-  const { theme } = useContext(ThemeContext);
-  const { isSidebarOpen, closeSidebar } = useContext(SidebarContext);
+const Sidebar = ({ currentPath }) => {
+  const { theme } = useContext(ThemeContext); // ThemeContext (if used later)
+  const { isSidebarOpen, closeSidebar } = useContext(SidebarContext); // Sidebar state
   const navbarRef = useRef(null);
 
-  // closing the navbar when clicked outside the sidebar area
   const handleClickOutside = (event) => {
     if (
       navbarRef.current &&
       !navbarRef.current.contains(event.target) &&
-      event.target.className !== "sidebar-oepn-btn"
+      event.target.className !== "sidebar-open-btn"
     ) {
       closeSidebar();
     }
@@ -51,7 +47,7 @@ const Sidebar = ({currentPath}) => {
     >
       <div className="sidebar-top">
         <div className="sidebar-brand">
-          {/* <img src={theme === LIGHT_THEME ? Logo : Logo} alt="" /> */}
+          {/* You can customize the logo based on the theme here */}
           <span className="sidebar-brand-text">CARSRENTAL</span>
         </div>
         <button className="sidebar-close-btn" onClick={closeSidebar}>
@@ -62,7 +58,10 @@ const Sidebar = ({currentPath}) => {
         <div className="sidebar-menu">
           <ul className="menu-list">
             <li className="menu-item">
-              <Link to="/Dashboard" className={currentPath === '/Dashboard' ? 'menu-link active' : 'menu-link'}>
+              <Link
+                to="/Dashboard"
+                className={currentPath === "/Dashboard" ? "menu-link active" : "menu-link"}
+              >
                 <span className="menu-link-icon">
                   <MdOutlineGridView size={18} />
                 </span>
@@ -70,7 +69,10 @@ const Sidebar = ({currentPath}) => {
               </Link>
             </li>
             <li className="menu-item">
-              <Link to="/Vehicles" className={currentPath === '/Vehicles' ? 'menu-link active' : 'menu-link'}>
+              <Link
+                to="/Vehicles"
+                className={currentPath === "/Vehicles" ? "menu-link active" : "menu-link"}
+              >
                 <span className="menu-link-icon">
                   <IoCarSport size={20} />
                 </span>
@@ -78,7 +80,10 @@ const Sidebar = ({currentPath}) => {
               </Link>
             </li>
             <li className="menu-item">
-              <Link to="/Statistics" className={currentPath === '/Satistics' ? 'menu-link active' : 'menu-link'}>
+              <Link
+                to="/Statistics"
+                className={currentPath === "/Statistics" ? "menu-link active" : "menu-link"}
+              >
                 <span className="menu-link-icon">
                   <MdOutlineBarChart size={20} />
                 </span>
@@ -86,7 +91,10 @@ const Sidebar = ({currentPath}) => {
               </Link>
             </li>
             <li className="menu-item">
-              <Link to="/" className={currentPath === '/settings' ? 'menu-link active' : 'menu-link'}>
+              <Link
+                to="/settings"
+                className={currentPath === "/settings" ? "menu-link active" : "menu-link"}
+              >
                 <span className="menu-link-icon">
                   <MdOutlineSettings size={20} />
                 </span>
@@ -94,7 +102,10 @@ const Sidebar = ({currentPath}) => {
               </Link>
             </li>
             <li className="menu-item">
-              <Link to="/" className={currentPath === '/logout' ? 'menu-link active' : 'menu-link'}>
+              <Link
+                to="/logout"
+                className={currentPath === "/logout" ? "menu-link active" : "menu-link"}
+              >
                 <span className="menu-link-icon">
                   <MdOutlineLogout size={20} />
                 </span>
