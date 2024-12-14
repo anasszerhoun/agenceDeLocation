@@ -9,7 +9,7 @@ export default  function AreaCards () {
         percentFillValue={80}
         cardInfo={{
           title: "Rented Cars",
-          value: "20 cars",
+          value: "20"+" cars",
           text: "We have sold 123 items.",
         }}
       />
