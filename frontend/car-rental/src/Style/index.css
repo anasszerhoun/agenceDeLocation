@@ -483,9 +483,33 @@ justify-content: center;
   border-radius: 0 8px 8px 0;
   position: relative;
   left: 40px;
-  top: 50px;
+  top: 25px;
+}
+.historique-location .reservation .status{
+  position: relative;
+  font-size: 1.1rem;
+  left: 40px;
+  font-weight: bold;
+  padding: 8px;
+  color: white;
+  width: 120px;
+  margin-top: 10px;
+  border-radius: 20px 0 20px 0;
+}
+.historique-location .reservation .active{
+  background-color: #097327;
+}
+.historique-location .reservation .Nonactive{
+  background-color: #d61616;
 }
 
+.active span{
+position: relative;
+left: 20px;}
+.Nonactive span{
+  position: relative;
+  left: 10px;
+}
 .nom-voiture h2{
   font-size: 2rem;
   font-weight: 700;
@@ -507,3 +531,10 @@ justify-content: center;
     color: white;
     border-radius: 20px 0 20px 0;
 }
+
+.facture{
+  position: relative;
+  top: 30px;
+}
+/*--------------------------*/
+/* App.css */

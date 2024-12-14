@@ -1,7 +1,6 @@
 import React from "react";
 import PersonalInformations from "./UserProfile/PersonalInformations";
 import Historique from "./UserProfile/Historique";
-import Active from "./UserProfile/Active";
 
 function UserProfile() {
   return (
