@@ -42,18 +42,20 @@
       border-collapse: collapse;
       color: var(--text-color-inverted);
 
+      
       td,
       th {
         padding: 14px 12px;
+        font-size: 14px;
         @media (max-width: 768px) {
-          font-size: 15px;
+          font-size: 14px;
           padding: 12px 10px;
         }
       }
-
+      
       thead {
         text-align: left;
-        font-size: 17px;
+        font-size: 15px;
         background-color: var(--thead-bg-color);
 
         th {
@@ -71,20 +73,20 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        column-gap: 6px;
+        column-gap: 4px;
 
         .dt-status-dot {
           width: 8px;
           height: 8px;
           border-radius: 100%;
 
-          &.dot-pending {
+          &.dot-rented {
             background-color: var(--orange-color);
           }
-          &.dot-canceled {
+          &.dot-down {
             background-color: var(--red-color);
           }
-          &.dot-delivered {
+          &.dot-available {
             background-color: var(--green-color);
           }
         }

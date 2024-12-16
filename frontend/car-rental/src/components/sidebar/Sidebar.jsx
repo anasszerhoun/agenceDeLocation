@@ -1,10 +1,9 @@
 import { useContext, useEffect, useRef } from "react";
 import {
-  MdOutlineBarChart,
   MdOutlineClose,
   MdOutlineGridView,
   MdOutlineLogout,
-  MdOutlineSettings,
+  MdManageAccounts
 } from "react-icons/md";
 import "./Sidebar.scss";
 import { Link } from "react-router-dom";
@@ -65,19 +64,11 @@ const Sidebar = ({currentPath}) => {
               </Link>
             </li>
             <li className="menu-item">
-              <Link to="/Statistics" className={currentPath === '/Satistics' ? 'menu-link active' : 'menu-link'}>
+              <Link to="/Admins" className={currentPath === '/Admins' ? 'menu-link active' : 'menu-link'}>
                 <span className="menu-link-icon">
-                  <MdOutlineBarChart size={20} />
+                  <MdManageAccounts size={20} />
                 </span>
-                <span className="menu-link-text">Statistics</span>
-              </Link>
-            </li>
-            <li className="menu-item">
-              <Link to="/" className={currentPath === '/settings' ? 'menu-link active' : 'menu-link'}>
-                <span className="menu-link-icon">
-                  <MdOutlineSettings size={20} />
-                </span>
-                <span className="menu-link-text">Settings</span>
+                <span className="menu-link-text">Administrators</span>
               </Link>
             </li>
             <li className="menu-item">

@@ -8,6 +8,7 @@ import BaseLayout from "./layout/BaseLayout";
 import  Dashboard  from "./screens/dashboard/DashboardScreen";
 import  PageNotFound  from "./screens/error/PageNotFound";
 import Vehicles from "./screens/vehicles/VehiclesList";
+import Admins from "./screens/admins/AdminsList";
 
 function App() {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -26,6 +27,7 @@ function App() {
           <Route element={<BaseLayout />}>
             <Route path="/Dashboard" element={<Dashboard />} />
             <Route path="/Vehicles" element={<Vehicles/>} />
+            <Route path="/Admins" element={<Admins/>} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>

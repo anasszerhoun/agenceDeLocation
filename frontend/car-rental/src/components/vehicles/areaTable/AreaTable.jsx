@@ -2,10 +2,10 @@ import AreaTableAction from "./AreaTableAction";
 import "./AreaTable.scss";
 
 const TABLE_HEADS = [
-  "Products",
-  "Order ID",
-  "Date",
-  "Customer name",
+  "Brand",
+  "Plate",
+  "Model",
+  "Type",
   "Status",
   "Price",
   "Action",

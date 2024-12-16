@@ -26,14 +26,15 @@ const grey = {
 
 const InputElement = styled('input')(
   ({ theme }) => `
-  width: 250px;
+ 
+  width: 240px;
   height:30px;
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
   padding: 8px 12px;
-  margin-bottom:15px;
+  margin-bottom:10px;
   border-radius: 8px;
   color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
   background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};

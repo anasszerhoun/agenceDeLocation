@@ -16,13 +16,20 @@ const Select = React.forwardRef(function Select(props, ref) {
   return <BaseSelect {...props} ref={ref} slots={slots} />;
 });
 
-export default function FilterSelect() {
+export default function FilterSelect({onFilterChange}) {
+  const handleFilterChange = (value) => {
+    if (value === 'all') {
+      onFilterChange({});
+    } else {
+      onFilterChange({ gender: value });
+    }
+  };
   return (
-    <Select defaultValue={"all"}>
-      <Option value={"all"}>all</Option>
-      <Option value={"available"}>available</Option>
-      <Option value={"rented"}>rented</Option>
-      <Option value={"down"}>down</Option>
+    <Select defaultValue='all' onChange={handleFilterChange}>
+      <Option value='all'>all</Option>
+      <Option value='available'>available</Option>
+      <Option value='rented'>rented</Option>
+      <Option value='down'>down</Option>
     </Select>
   );
 }
@@ -66,14 +73,13 @@ CustomButton.propTypes = {
 
 const StyledButton = styled('button', { shouldForwardProp: () => true })(
   ({ theme }) => `
-  position: absolute;
+  
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 0.875rem;
   box-sizing: border-box;
   width:100px;
   height:30px;
-  margin-left:260px;
-  margin-bottom:15px;
+  margin-bottom:10px;
   padding: 5px 8px;
   border-radius: 8px;
   text-align: left;
@@ -115,8 +121,8 @@ const Listbox = styled('ul')(
   font-size: 0.875rem;
   box-sizing: border-box;
   padding: 6px;
-  margin: 12px 0;
-  min-width: 320px;
+  margin: 5px 1px;
+  min-width: 100px;
   border-radius: 12px;
   overflow: auto;
   outline: 0;
@@ -133,6 +139,7 @@ const Option = styled(BaseOption)(
   ({ theme }) => `
   list-style: none;
   padding: 8px;
+  margin-bottom:2px;
   border-radius: 8px;
   cursor: default;
 
