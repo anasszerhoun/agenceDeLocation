@@ -330,6 +330,10 @@
 }
  */
  
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
  .cont{
    /* height: auto; */
@@ -338,7 +342,7 @@
    position: relative;
    top: 40px;
    border-radius: 20px;
-   box-shadow: 1px 1px 1px 1px gray;
+   border: 2px solid rgba(128, 128, 128, 0.114);
    padding-bottom: 50px;
  }
  .personal-informations-container{
