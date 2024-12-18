@@ -1,17 +1,8 @@
-package com.example.CarsRental.model;
-
-import com.example.CarsRental.repository.clientRepository;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+package com.example.CarsRental.dto;
 
 import java.util.Date;
 
-@Entity
-public class Reservation {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class reservationDTO {
     private int idReservation;
     private Date dateDebut;
     private Date dateFin;

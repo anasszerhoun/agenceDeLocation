@@ -1,18 +1,10 @@
-package com.example.CarsRental.model;
+package com.example.CarsRental.dto;
 
-import jakarta.persistence.*;
-
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class userDTO {
     private int idUser;
     private String nomUser;
     private String prenomUser;
     private String mail;
-    private String password;
 
     public int getIdUser() {
         return idUser;
@@ -46,11 +38,4 @@ public abstract class User {
         this.mail = mail;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

@@ -1,21 +1,11 @@
-package com.example.CarsRental.model;
+package com.example.CarsRental.dto;
 
-import jakarta.persistence.*;
-
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-@Entity
-public class Client extends User {
-
+public class clientDTO extends userDTO{
     private Date dateNaissance;
     private String cin;
     private String permisConduire;
-
-    /*@OneToMany
-    @JoinColumn(name="id_client")
-    private List<Reservation> reservations = new ArrayList<>();*/
 
     public Date getDateNaissance() {
         return dateNaissance;
@@ -40,4 +30,5 @@ public class Client extends User {
     public void setPermisConduire(String permisConduire) {
         this.permisConduire = permisConduire;
     }
+
 }

@@ -1,16 +1,9 @@
-package com.example.CarsRental.model;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+package com.example.CarsRental.dto;
 
 import java.util.Date;
 
-@Entity
-public class Facture {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class factureDTO {
+
     private int idFacture;
     private float montantPaye;
     private Date datePaiement;

@@ -1,7 +1,10 @@
 package com.example.CarsRental.repository;
 
+import com.example.CarsRental.model.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface clientRepository extends JpaRepository {
+@Repository
+public interface clientRepository extends JpaRepository<Client,Long> {
 
 }

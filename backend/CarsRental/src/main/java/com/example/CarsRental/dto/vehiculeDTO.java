@@ -1,22 +1,12 @@
-package com.example.CarsRental.model;
+package com.example.CarsRental.dto;
 
-import jakarta.persistence.*;
-
-import java.util.List;
-
-@Entity
-public class Vehicule {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class vehiculeDTO {
     private String immatriculation;
     private String marque;
     private String modele;
     private String type;
     private String status;
     private float tarif;
-
-
 
     public String getImmatriculation() {
         return immatriculation;
