@@ -1,6 +1,5 @@
 package com.example.CarsRental.entity;
 
-import lombok.*;
 import java.util.Date;
 import jakarta.persistence.*;
 
@@ -10,23 +9,53 @@ import jakarta.persistence.*;
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(updatable = false)
     private int idReservation;
-    @Getter
-    @Setter
     private Date dateDebut;
-    @Getter
-    @Setter
     private Date dateFin;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="facture_id")
-    @Getter
-    @Setter
-    Facture facture;
+    private Facture facture;
 
     @ManyToOne
     @JoinColumn(name = "vehicule_id")
-    @Getter
-    @Setter
-    Vehicule vehicule;
+    private Vehicule vehicule;
+
+
+    public int getIdReservation() {
+        return idReservation;
+    }
+
+    public Date getDateDebut() {
+        return dateDebut;
+    }
+
+    public void setDateDebut(Date dateDebut) {
+        this.dateDebut = dateDebut;
+    }
+
+    public Date getDateFin() {
+        return dateFin;
+    }
+
+    public void setDateFin(Date dateFin) {
+        this.dateFin = dateFin;
+    }
+
+    public Facture getFacture() {
+        return facture;
+    }
+
+    public void setFacture(Facture facture) {
+        this.facture = facture;
+    }
+
+    public Vehicule getVehicule() {
+        return vehicule;
+    }
+
+    public void setVehicule(Vehicule vehicule) {
+        this.vehicule = vehicule;
+    }
 }
