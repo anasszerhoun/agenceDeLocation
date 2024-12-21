@@ -2,7 +2,6 @@ package com.example.CarsRental.entity;
 
 import java.util.*;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import jakarta.persistence.*;
 
 
