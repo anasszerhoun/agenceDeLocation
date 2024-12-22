@@ -1,6 +1,10 @@
 package com.example.CarsRental.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import com.example.CarsRental.dto.vehiculeDTO;
+import org.modelmapper.ModelMapper;
 import com.example.CarsRental.entity.Vehicule;
 import org.springframework.stereotype.Service;
 import com.example.CarsRental.repository.vehiculeRepository;
@@ -11,12 +15,25 @@ public class vehiculeService {
     @Autowired
     private vehiculeRepository vehiculeRepo;
 
-    public Vehicule createVehicule(Vehicule vehicule) {
-        return vehiculeRepo.save(vehicule);
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public vehiculeDTO createVehicule(vehiculeDTO vDTO) {
+        Vehicule vehicule = modelMapper.map(vDTO, Vehicule.class);
+        vehicule = vehiculeRepo.save(vehicule);
+        return modelMapper.map(vehicule, vehiculeDTO.class);
     }
 
-    public List<Vehicule> getAllVehicules() {
-        return vehiculeRepo.findAll();
+    public List<vehiculeDTO> getAllVehicules() {
+        return vehiculeRepo.findAll().stream()
+                .map(vehicule -> modelMapper.map(vehicule, vehiculeDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<vehiculeDTO> getVehiculesByPriceRange(float min,float max) {
+        return vehiculeRepo.findVehiculesByPriceRange(min,max).stream()
+                .map(vehicule -> modelMapper.map(vehicule, vehiculeDTO.class))
+                .collect(Collectors.toList());
     }
 
     public Vehicule getVehicleById(Long id) {
@@ -26,4 +43,5 @@ public class vehiculeService {
     public void deleteVehicule(Long id) {
         vehiculeRepo.deleteById(id);
     }
+
 }

@@ -8,12 +8,11 @@ import jakarta.persistence.*;
 public class Client extends User {
 
     private Date dateNaissance;
+    private String Telephone;
     private String cin;
     private String permisConduire;
-
-    @OneToMany
-    @JoinColumn(name="id_client")
-    private ArrayList<Reservation> reservations ;
+    @OneToMany(mappedBy = "client")
+    private List<Reservation> reservations ;
 
     @ManyToMany
     @JoinTable(
@@ -29,6 +28,14 @@ public class Client extends User {
 
     public void setDateNaissance(Date dateNaissance) {
         this.dateNaissance = dateNaissance;
+    }
+
+    public String getTelephone() {
+        return Telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        Telephone = telephone;
     }
 
     public String getCin() {
@@ -47,11 +54,11 @@ public class Client extends User {
         this.permisConduire = permisConduire;
     }
 
-    public ArrayList<Reservation> getReservations() {
+    public List<Reservation> getReservations() {
         return reservations;
     }
 
-    public void setReservations(ArrayList<Reservation> reservations) {
+    public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
     }
 

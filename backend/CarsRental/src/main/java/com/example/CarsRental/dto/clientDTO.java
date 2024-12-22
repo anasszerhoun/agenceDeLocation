@@ -6,6 +6,7 @@ public class clientDTO extends userDTO{
     private Date dateNaissance;
     private String cin;
     private String permisConduire;
+    private String Telephone;
 
     public Date getDateNaissance() {
         return dateNaissance;
@@ -31,4 +32,11 @@ public class clientDTO extends userDTO{
         this.permisConduire = permisConduire;
     }
 
+    public String getTelephone() {
+        return Telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        Telephone = telephone;
+    }
 }

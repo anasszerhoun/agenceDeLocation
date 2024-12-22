@@ -1,9 +1,7 @@
 package com.example.CarsRental.entity;
 
 import java.util.*;
-
 import jakarta.persistence.*;
-
 
 @Entity
 @Table(name = "vehicule")
@@ -26,12 +24,16 @@ public class Vehicule {
     @ManyToMany(mappedBy = "vehiculesFavorites")
     private  List<Client> Fans;
 
-    public String getImmatriculation() {
-        return immatriculation;
+    public int getId_vehicule() {
+        return id_vehicule;
     }
 
     public void setId_vehicule(int id_vehicule) {
         this.id_vehicule = id_vehicule;
+    }
+
+    public String getImmatriculation() {
+        return immatriculation;
     }
 
     public void setImmatriculation(String immatriculation) {

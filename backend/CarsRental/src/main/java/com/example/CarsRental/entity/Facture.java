@@ -10,6 +10,7 @@ public class Facture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idFacture;
     private float montantPaye;
+    @Temporal(TemporalType.DATE)
     private Date datePaiement;
 
     @OneToOne(mappedBy = "facture")

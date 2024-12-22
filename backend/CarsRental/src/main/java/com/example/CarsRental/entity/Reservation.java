@@ -11,7 +11,9 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
     private int idReservation;
+    @Temporal(TemporalType.DATE)
     private Date dateDebut;
+    @Temporal(TemporalType.DATE)
     private Date dateFin;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -22,9 +24,18 @@ public class Reservation {
     @JoinColumn(name = "vehicule_id")
     private Vehicule vehicule;
 
+    //modif database
+    @ManyToOne
+    @JoinColumn(name = "id_client")
+    private Client client;
+    //end modif | purpose : get id_client from reservation
 
     public int getIdReservation() {
         return idReservation;
+    }
+
+    public void setIdReservation(int idReservation) {
+        this.idReservation = idReservation;
     }
 
     public Date getDateDebut() {
@@ -57,5 +68,13 @@ public class Reservation {
 
     public void setVehicule(Vehicule vehicule) {
         this.vehicule = vehicule;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

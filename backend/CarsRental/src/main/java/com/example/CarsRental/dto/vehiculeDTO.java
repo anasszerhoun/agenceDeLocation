@@ -1,12 +1,16 @@
 package com.example.CarsRental.dto;
+import java.util.List;
+import com.example.CarsRental.entity.Client;
 
 public class vehiculeDTO {
+
     private String immatriculation;
     private String marque;
     private String modele;
     private String type;
     private String status;
     private float tarif;
+    private List<Client> fans;
 
     public String getImmatriculation() {
         return immatriculation;
@@ -54,5 +58,13 @@ public class vehiculeDTO {
 
     public void setTarif(float tarif) {
         this.tarif = tarif;
+    }
+
+    public List<Client> getFans() {
+        return fans;
+    }
+
+    public void setFans(List<Client> fans) {
+        this.fans = fans;
     }
 }
