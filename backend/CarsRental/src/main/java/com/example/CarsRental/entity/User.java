@@ -1,6 +1,5 @@
 package com.example.CarsRental.entity;
 
-import lombok.*;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,18 +9,50 @@ public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private int idUser;
-    @Getter
-    @Setter
+
     private String nomUser;
-    @Getter
-    @Setter
     private String prenomUser;
-    @Getter
-    @Setter
     private String mail;
-    @Getter
-    @Setter
     private String password;
 
+    // Getters and Setters explicites
+    public String getMail() {
+        return mail;
+    }
 
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getNomUser() {
+        return nomUser;
+    }
+
+    public void setNomUser(String nomUser) {
+        this.nomUser = nomUser;
+    }
+
+    public String getPrenomUser() {
+        return prenomUser;
+    }
+
+    public void setPrenomUser(String prenomUser) {
+        this.prenomUser = prenomUser;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
 }

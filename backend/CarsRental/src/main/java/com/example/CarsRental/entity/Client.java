@@ -18,11 +18,12 @@ public class Client extends User {
     @Setter
     private String permisConduire;
 
+
     @OneToMany
     @JoinColumn(name="id_client")
     @Getter
-    @Setter
-    private ArrayList<Reservation> reservations ;
+
+    private List<Reservation> reservations = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
@@ -31,8 +32,8 @@ public class Client extends User {
             inverseJoinColumns = @JoinColumn(name = "vehicle_id")
     )
     @Getter
-    @Setter
-    ArrayList<Vehicule> vehiculesFavorites;
+
+    List<Vehicule> vehiculesFavorites = new ArrayList<>();
 
 
 }
