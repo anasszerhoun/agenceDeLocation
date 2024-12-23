@@ -65,6 +65,8 @@ public class AuthController {
         System.out.println("Hellllllllloooooo");
     }
 
+    
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/login")
     public ResponseEntity<String> login(@RequestParam("mail") String mail
             , @RequestParam("password") String password,
