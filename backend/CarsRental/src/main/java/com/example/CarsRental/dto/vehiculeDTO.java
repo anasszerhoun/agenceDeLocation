@@ -3,14 +3,20 @@ import java.util.List;
 import com.example.CarsRental.entity.Client;
 
 public class vehiculeDTO {
+    public vehiculeDTO(String immatriculation) {
+        this.immatriculation = immatriculation;
+    }
+
+    public vehiculeDTO() {
+    }
 
     private String immatriculation;
     private String marque;
-    private String modele;
-    private String type;
-    private String status;
-    private float tarif;
-    private List<Client> fans;
+//    private String modele;
+//    private String type;
+//    private String status;
+//    private float tarif;
+//    private List<Client> fans;
 
     public String getImmatriculation() {
         return immatriculation;
@@ -28,43 +34,43 @@ public class vehiculeDTO {
         this.marque = marque;
     }
 
-    public String getModele() {
-        return modele;
-    }
-
-    public void setModele(String modele) {
-        this.modele = modele;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public float getTarif() {
-        return tarif;
-    }
-
-    public void setTarif(float tarif) {
-        this.tarif = tarif;
-    }
-
-    public List<Client> getFans() {
-        return fans;
-    }
-
-    public void setFans(List<Client> fans) {
-        this.fans = fans;
-    }
+//    public String getModele() {
+//        return modele;
+//    }
+//
+//    public void setModele(String modele) {
+//        this.modele = modele;
+//    }
+//
+//    public String getType() {
+//        return type;
+//    }
+//
+//    public void setType(String type) {
+//        this.type = type;
+//    }
+//
+//    public String getStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(String status) {
+//        this.status = status;
+//    }
+//
+//    public float getTarif() {
+//        return tarif;
+//    }
+//
+//    public void setTarif(float tarif) {
+//        this.tarif = tarif;
+//    }
+//
+//    public List<Client> getFans() {
+//        return fans;
+//    }
+//
+//    public void setFans(List<Client> fans) {
+//        this.fans = fans;
+//    }
 }

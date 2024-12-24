@@ -1,6 +1,8 @@
 package com.example.CarsRental.entity;
 
 import java.util.*;
+
+import com.example.CarsRental.enumiration.CarStatus;
 import jakarta.persistence.*;
 
 @Entity
@@ -18,7 +20,10 @@ public class Vehicule {
     private String marque;
     private String modele;
     private String type;
-    private String status;
+
+    @Enumerated(EnumType.STRING)
+    private CarStatus status;
+
     private float tarif;
 
     @ManyToMany(mappedBy = "vehiculesFavorites")
@@ -64,12 +69,12 @@ public class Vehicule {
         this.type = type;
     }
 
-    public String getStatus() {
+    public CarStatus getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        this.status = CarStatus.valueOf(status);
     }
 
     public float getTarif() {

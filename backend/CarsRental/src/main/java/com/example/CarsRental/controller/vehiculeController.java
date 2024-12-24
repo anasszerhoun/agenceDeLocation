@@ -44,13 +44,6 @@ public class vehiculeController {
 
 
 
-
-
-
-
-
-
-
     @GetMapping("/{id}")
     public Vehicule getVehiculeById(@PathVariable Long id) {
         return vehiculeServ.getVehicleById(id);

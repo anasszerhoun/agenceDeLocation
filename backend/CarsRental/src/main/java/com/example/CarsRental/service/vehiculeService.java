@@ -1,9 +1,13 @@
 package com.example.CarsRental.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.example.CarsRental.dto.vehiculeDTO;
+import com.example.CarsRental.enumiration.CarStatus;
 import org.modelmapper.ModelMapper;
 import com.example.CarsRental.entity.Vehicule;
 import org.springframework.stereotype.Service;
@@ -42,6 +46,22 @@ public class vehiculeService {
 
     public void deleteVehicule(Long id) {
         vehiculeRepo.deleteById(id);
+    }
+
+    public List<Map<String, Object>> getPopularMarques() {
+        List<Object[]> result = vehiculeRepo.getTop5RentedMarques();
+        List<Map<String, Object>> response = new ArrayList<>();
+        for (Object[] row : result) {
+            Map<String, Object> rowMap = new HashMap<>();
+            rowMap.put("numberOfRent", row[1]);
+            rowMap.put("marque", row[0]);
+            response.add(rowMap);
+        }
+        return response.stream().limit(5).collect(Collectors.toList());
+    }
+
+    public List<vehiculeDTO> getCarsUnderMaintenance() {
+        return vehiculeRepo.findByStatus(CarStatus.UNDER_MAINTENANCE);
     }
 
 }
