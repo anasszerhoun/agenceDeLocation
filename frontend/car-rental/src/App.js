@@ -6,6 +6,9 @@ import UserProfile from "./Components/UserProfile";
 import Reservation from "./Components/Reservation";
 import Login from "./Components/authentication/Login";
 import Register from "./Components/authentication/Register";
+import Home from "./Components/Home/Home";
+import CarPreview from "./Components/Home/CarPreview";
+
 
 import Header from "./Components/Header";
 import {createBrowserRouter, RouterProvider ,Navigate} from "react-router-dom"
@@ -44,6 +47,15 @@ function App() {
     {
       path:"/register",
       element:<Register />
+    },{
+      path:"/home",
+      element:<Home />
+    },{
+      path:"/carPreview",
+      element:<div>
+          <Header />
+          <CarPreview />
+        </div>
     }
   ]);
 

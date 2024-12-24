@@ -21,6 +21,7 @@ import com.example.CarsRental.security.JwtToken;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:3000")
 public class AuthController {
 
    /* private final AuthenticationManager authenticationManager;*/
@@ -65,8 +66,25 @@ public class AuthController {
         System.out.println("Hellllllllloooooo");
     }
 
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody Client client) {
+
+        if (service.findByEmail(client.getMail()) == null) {
+            System.out.println("Nom : " + client.getNomUser());
+            System.out.println("Prénom : " + client.getPrenomUser());
+            System.out.println("Email : " + client.getMail());
+            System.out.println("Mot de passe : " + client.getPassword());
+            System.out.println("Permis : " + client.getPermisConduire());
+            System.out.println("Numéro de Téléphone : " + client.getNumTelephone());
+            System.out.println("Date Naissance : " + client.getDateNaissance());
+
+            service.save(client);
+            return ResponseEntity.ok().body(true);
+        } else {
+            return ResponseEntity.ok().body(false);
+        }
+    }
     
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/login")
     public ResponseEntity<String> login(@RequestParam("mail") String mail
             , @RequestParam("password") String password,
