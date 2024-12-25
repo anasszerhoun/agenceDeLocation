@@ -1,12 +1,12 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Star, Search, Filter } from 'lucide-react';
 import axios from "axios"
 
 const Home = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [priceFilter, setPriceFilter] = useState({ min: 0, max: 100000 });
-    const [startDate, setStartDate] = useState(''); // Start date of rental
-    const [endDate, setEndDate] = useState(''); // End date of rental
+    // const [startDate, setStartDate] = useState(''); // Start date of rental
+    // const [endDate, setEndDate] = useState(''); // End date of rental
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8; // Update for 4 cards in a row
     const [carData, setCarData] = useState([]);
@@ -252,36 +252,52 @@ const Home = () => {
     // Total pages calculation
     const totalPages = Math.ceil(filteredCars.length / itemsPerPage);
 
-    const sendData = async (data) => {
-        const res = await axios.post(
-          "http://localhost:8080/api/car/search",data,{
+    // const sendData = async (data) => {
+    //     const res = await axios.post(
+    //       "http://localhost:8080/api/car/search",data,{
+    //         headers: {
+    //           "Content-Type": "application/json",  
+    //         },
+    //     }
+    //     );
+    //     if(res.data){
+    //         setCarData(res.data);
+    //     }
+    // }
+
+    const getData = async () => {
+        const res = await axios.get(
+          "http://localhost:8080/api/car/search",{
             headers: {
               "Content-Type": "application/json",  
             },
         }
         );
         if(res.data){
-            console.log(res.data);
             setCarData(res.data);
         }
     }
+    useEffect(() => {
+        getData();
+    }, []);
 
-    const handleSearch = () => {
-        if(endDate==="" && startDate ===""){
-            console.log("Veuillez choisir la date")
-        }
-        else{
-            const data = {
-                startDate: startDate,
-                endDate: endDate,
-            }
-            sendData(data);
-        }
-    }
+    // const handleSearch = () => {
+    //     if(endDate==="" && startDate ===""){
+    //         console.log("Veuillez choisir la date")
+    //     }
+    //     else{
+    //         const data = {
+    //             startDate: startDate,
+    //             endDate: endDate,
+    //         }
+    //         sendData(data);
+    //     }
+    // }
+
     const handleChoose = (index) => {
         
         const selectedCar = carData[index];
-        console.log(selectedCar);
+        
 
         localStorage.setItem("selectedCar",JSON.stringify(selectedCar));
         window.location.href="/carPreview";
@@ -289,7 +305,6 @@ const Home = () => {
 
     return (
         <div className="bg-white-100 mt-3 min-h-screen">
-            {/* Hero Section */}
             <section className="relative h-[600px] overflow-hidden">
                 <img
                     src="imageCar.png"
@@ -311,7 +326,6 @@ const Home = () => {
             </section>
             <hr />
 
-            {/* Explore Our Brands */}
             <section className="py-16 bg-white">
                 <div className="container mx-auto px-4">
                     <h2 className="text-3xl font-bold text-center mb-12">Explore Our Brands</h2>
@@ -336,7 +350,7 @@ const Home = () => {
                         <input
                             type="text"
                             placeholder="Search cars by name or brand"
-                            className="w-full p-3 pl-10 border rounded-lg"
+                            className="w-full  pt-3 pb-3 pl-12 border rounded-lg"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -359,30 +373,12 @@ const Home = () => {
                             onChange={(e) => setPriceFilter(prev => ({ ...prev, max: Number(e.target.value) }))}
                         />
                     </div>
-                    <div className="flex items-center space-x-2">
-                        <label>Rental Start:</label>
-                        <input
-                            type="date"
-                            className="p-2 border rounded-lg"
-                            value={startDate}
-                            onChange={(e) => setStartDate(e.target.value)}
-                        />
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <label>Rental End:</label>
-                        <input
-                            type="date"
-                            className="p-2 border rounded-lg"
-                            value={endDate}
-                            onChange={(e) => setEndDate(e.target.value)}
-                        />
-                    </div>
                 </div>
-                <div className='align-center'>
+                {/* <div className='align-center'>
                     <button className='btn btn-primary' onClick={handleSearch}>Search</button>
-                </div>
+                </div> */}
             </section>
-            {/* Featured Cars */}
+
             <section className="py-16">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -407,7 +403,7 @@ const Home = () => {
                                     <hr />
 
                                     <div className="flex justify-between items-center">
-                                        <span className="text-2xl font-bold">${car.tarif}</span>
+                                        <span className="text-2xl font-bold">{car.tarif}DH</span>
                                         <button className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition duration-300" onClick={()=>handleChoose(index)}>
                                             View Details
                                         </button>
@@ -417,7 +413,6 @@ const Home = () => {
                         ))}
                     </div>
 
-                    {/* Pagination */}
                     {totalPages > 1 && (
                         <div className="flex justify-center items-center space-x-4 mt-8">
                             <button

@@ -185,7 +185,6 @@ function Favoris() {
 
   useEffect(() => {
     fetchFavoris();
-    console.log(cartItems);
   }, []);
 
   const removeItem = async (id) => {
@@ -226,7 +225,11 @@ function Favoris() {
     }
   };
 
-  const handleCheckOut = () => {
+  const handleCheckOut = (index) => {
+    
+    const selectedCar = cartItems.find(item => item.idVehicule === index);
+    localStorage.setItem("selectedCar", JSON.stringify(selectedCar));
+    
     window.location.href = "/reservation";
   }
 
@@ -286,8 +289,6 @@ function Favoris() {
             <div className="space-y-5">
               {cartItems.length > 0 ? (
                 cartItems.map((item) => {
-                  // Log the item information to the console
-                  console.log("Cart Item:", item);
 
                   return (
                     <Box
@@ -309,9 +310,9 @@ function Favoris() {
                         </Typography>
                         <Typography
                           variant="body2"
-                          sx={{ marginLeft:"20px" ,color: "text.secondary", fontSize: "0.95rem" }}
+                          sx={{ marginLeft:"50px" ,color: "text.secondary", fontSize: "0.95rem" }}
                         >
-                          {`3jours     -   ${item.tarif}`}
+                          {`       ${item.tarif}DH`}
                         </Typography>
                       </Box>
                       <Box
@@ -321,7 +322,7 @@ function Favoris() {
                           variant="outlined"
                           size="small"
                           sx={{ fontSize: "0.7rem" }}
-                          onClick={handleCheckOut}
+                          onClick={ () => handleCheckOut(item.idVehicule)}
                         >
                           Proceed to Checkout
                         </Button>

@@ -29,6 +29,7 @@ function App() {
           <Header />
           <UserProfile />
           <Reservation />
+          <AddVehicule />
         </div>
       ),
     },
@@ -70,7 +71,6 @@ function App() {
       {/* <UserProfile /> */}
       {/* <Reservation /> */}
     </div>
-
   );
 }
 

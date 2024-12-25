@@ -18,7 +18,6 @@ const CarPreview = () => {
             window.location.href="/home"
         }
     }
-    console.log(car)
 
     return (
         <div className="bg-gray-100 mt-3 min-h-screen">
