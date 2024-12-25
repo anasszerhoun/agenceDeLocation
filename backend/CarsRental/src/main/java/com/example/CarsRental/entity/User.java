@@ -15,7 +15,6 @@ public abstract class User {
     private String mail;
     private String password;
 
-    // Getters and Setters explicites
     public String getMail() {
         return mail;
     }

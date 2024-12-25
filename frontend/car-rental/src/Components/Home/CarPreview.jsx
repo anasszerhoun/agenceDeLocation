@@ -1,10 +1,23 @@
 import React from 'react';
 import { Star, ChevronLeft } from 'lucide-react';
+import apiRequest from '../../apiRequest';
+
 
 const CarPreview = () => {
 
     const car = JSON.parse(localStorage.getItem("selectedCar"));
 
+
+
+    const handleBook = () => {
+        if(localStorage.getItem("token") === null){
+            window.location.href = "/login"
+        }
+        else{
+            const rep = apiRequest("POST","http://localhost:8080/api/car/favoris/add?id="+car.idVehicule);
+            window.location.href="/home"
+        }
+    }
     console.log(car)
 
     return (
@@ -75,7 +88,7 @@ const CarPreview = () => {
                             </div>
                         </div>
 
-                        <button className="w-full bg-blue-600 text-white py-3 rounded-full font-semibold hover:bg-blue-700 transition">
+                        <button onClick={handleBook} className="w-full bg-blue-600 text-white py-3 rounded-full font-semibold hover:bg-blue-700 transition">
                             Book Now
                         </button>
                     </div>

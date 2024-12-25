@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class vehiculeService {
@@ -14,5 +15,9 @@ public class vehiculeService {
     private vehiculeRepository repo;
     public List<Vehicule> findAll(){
         return repo.findAll();
+    }
+
+    public Optional<Vehicule> findById(Long id){
+        return repo.findById(id);
     }
 }

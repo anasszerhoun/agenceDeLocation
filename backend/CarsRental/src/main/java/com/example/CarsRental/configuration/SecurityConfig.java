@@ -31,18 +31,17 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        System.out.println("HHHHHHHHHHHHHH");
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/login", "/login","/api/auth/register" ,"/api/car/search").permitAll()
+                        .requestMatchers("/api/auth/login", "/login","/api/auth/register" ,"/api/car/search","/api/car/favoris","/api/car/favoris/add"
+                                ,"/api/car/favoris/remove").permitAll()
                         .requestMatchers("api/auth/sayHello").authenticated()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();  // Utilisation de BCrypt pour encoder et comparer les mots de passe

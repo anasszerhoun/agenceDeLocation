@@ -12,6 +12,7 @@ import jakarta.persistence.*;
 public class Vehicule {
 
     @Id
+    @JsonProperty("idVehicule")  // Si vous voulez un nom spécifique dans le JSON
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_vehicule;
 
@@ -36,7 +37,7 @@ public class Vehicule {
 
     @Getter
     @Setter
-    @JsonProperty("status")  // Si vous voulez un nom spécifique dans le JSON
+    @JsonProperty("status")
     private String status;
 
     @Getter

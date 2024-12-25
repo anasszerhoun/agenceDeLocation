@@ -66,8 +66,9 @@ public class Client extends User {
             inverseJoinColumns = @JoinColumn(name = "vehicle_id")
     )
     @Getter
-
     List<Vehicule> vehiculesFavorites = new ArrayList<>();
 
-
+    public List<Vehicule> getVehiculesFavorites() {
+        return vehiculesFavorites;
+    }
 }

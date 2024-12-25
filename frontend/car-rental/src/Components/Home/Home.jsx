@@ -288,7 +288,7 @@ const Home = () => {
     }
 
     return (
-        <div className="bg-white-100 min-h-screen">
+        <div className="bg-white-100 mt-3 min-h-screen">
             {/* Hero Section */}
             <section className="relative h-[600px] overflow-hidden">
                 <img

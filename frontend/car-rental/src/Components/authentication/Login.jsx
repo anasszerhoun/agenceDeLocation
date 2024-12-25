@@ -22,7 +22,7 @@ export default function Login() {
       if (token) {
         console.log("Login successful, token stored in localStorage:", token);
         localStorage.setItem("token", token);
-        window.location.href="/profile"
+        window.location.href="/home"
       } else {
         console.error("Token not found in the response");
       }

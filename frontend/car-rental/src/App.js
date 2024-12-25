@@ -10,7 +10,7 @@ import Home from "./Components/Home/Home";
 import CarPreview from "./Components/Home/CarPreview";
 
 
-import Header from "./Components/Header";
+import Header from "./Components/header/Header";
 import {createBrowserRouter, RouterProvider ,Navigate} from "react-router-dom"
 
 
@@ -38,7 +38,7 @@ function App() {
     },
     {
       path: "/reservation",
-      element: isAuthenticated() ? <Reservation /> : <Navigate to="/login" />, // Rediriger si non authentifié
+      element: isAuthenticated() ? <div><Header /><Reservation /></div> : <Navigate to="/login" />, // Rediriger si non authentifié
     },
     {
       path: "/login",
@@ -49,13 +49,17 @@ function App() {
       element:<Register />
     },{
       path:"/home",
-      element:<Home />
+      element:
+      <div>
+        <Header />
+        <Home />
+      </div>
     },{
       path:"/carPreview",
       element:<div>
           <Header />
           <CarPreview />
-        </div>
+      </div>
     }
   ]);
 

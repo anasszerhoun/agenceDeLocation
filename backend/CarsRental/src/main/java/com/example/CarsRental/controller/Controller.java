@@ -4,22 +4,22 @@ import com.example.CarsRental.dto.searchDTO;
 import com.example.CarsRental.entity.Client;
 import com.example.CarsRental.entity.Reservation;
 import com.example.CarsRental.entity.Vehicule;
+import com.example.CarsRental.repository.vehiculeRepository;
 import com.example.CarsRental.service.clientService;
 import com.example.CarsRental.service.reservationService;
 import com.example.CarsRental.service.vehiculeService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -30,10 +30,13 @@ public class Controller {
 
     private vehiculeService service ;
     private reservationService reservationServ;
+    private clientService clientSer;
 
-    public Controller(vehiculeService service , reservationService reservationSer) {
+
+    public Controller(vehiculeService service , reservationService reservationSer,clientService clientSer) {
         this.service = service;
         this.reservationServ = reservationSer;
+        this.clientSer = clientSer;
     }
     @PostMapping("/search")
     public ResponseEntity<?> searchByDate(@RequestBody searchDTO search) throws ParseException, JsonProcessingException {
@@ -79,10 +82,67 @@ public class Controller {
 
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonResponse = objectMapper.writeValueAsString(filteredList);
+        return ResponseEntity.ok(jsonResponse);
+    }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/favoris")
+    public ResponseEntity<?> getFavoris() throws JsonProcessingException {
+        String username = getAuthenticatedUsername();
+        Client client = clientSer.findByEmail(username);
 
+        List<Vehicule> vehicules = client.getVehiculesFavorites();
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonResponse = objectMapper.writeValueAsString(vehicules);
+
+        System.out.println(jsonResponse);
 
         return ResponseEntity.ok(jsonResponse);
+    }
+
+    @PostMapping("/favoris/add")
+    public Boolean addFavoris(@RequestParam Long id){
+
+        String username = getAuthenticatedUsername();
+        Client client = clientSer.findByEmail(username);
+
+
+
+        Optional<Vehicule> optionalReponse = service.findById(id);
+        Vehicule vehicule = optionalReponse.get();
+        if(!client.getVehiculesFavorites().contains(vehicule)){
+            client.getVehiculesFavorites().add(vehicule);
+            clientSer.save(client);
+        }
+
+        System.out.println("Favoris ajouter");
+        return true;
+    };
+    @DeleteMapping("/favoris/remove")
+    public Boolean deleteFavoris(@RequestParam Long id){
+
+        String username = getAuthenticatedUsername();
+        Client client = clientSer.findByEmail(username);
+
+        Optional<Vehicule> optionalReponse = service.findById(id);
+        Vehicule vehicule = optionalReponse.get();
+        if(client.getVehiculesFavorites().contains(vehicule)){
+            client.getVehiculesFavorites().remove(vehicule);
+            clientSer.save(client);
+        }
+
+        System.out.println("Favoris Delete");
+        return true;
+    };
+
+    private String getAuthenticatedUsername() {
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof User) {
+            return ((User) principal).getUsername();
+        }
+        return null;
     }
 
 }
