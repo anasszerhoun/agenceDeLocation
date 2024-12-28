@@ -19,4 +19,7 @@ public class reservationService {
         return repo.findByVehicule(vehicule);
     };
 
+    public Reservation save(Reservation reservation){
+        return repo.save(reservation);
+    }
 }

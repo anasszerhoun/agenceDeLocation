@@ -159,6 +159,7 @@ import { IconButton, Badge, Box, Button, Typography } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Trash2 } from "lucide-react";
 import apiRequest from "../../apiRequest";
+import axios from "axios"
 
 function Favoris() {
   const initialCars = [
@@ -171,7 +172,7 @@ function Favoris() {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   const fetchFavoris = async () => {
-    try {
+    /*try {
       const response = await apiRequest(
         "GET",
         "http://localhost:8080/api/car/favoris"
@@ -180,7 +181,19 @@ function Favoris() {
     } catch (error) {
       console.error("Error fetching favoris:", error);
       alert("There was an error fetching the favorites.");
-    }
+    }*/
+   const token = localStorage.getItem("token");
+   try{
+    const response = await axios.get("http://localhost:8080/api/car/favoris",{
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+     setCartItems(response.data)
+   }catch(error){
+     console.log(error)
+     alert("There was an error fetching the favorites.");
+   }
   };
 
   useEffect(() => {
@@ -235,9 +248,9 @@ function Favoris() {
 
   return (
     <>
-      <IconButton color="inherit" onClick={toggleCart}>
+      <IconButton color="inherit" style={{marginTop:"6px"}} onClick={toggleCart}>
         <Badge color="secondary" badgeContent={cartItems.length}>
-          <ShoppingCartIcon />
+          <ShoppingCartIcon style={{ fontSize: 30 }}/>
         </Badge>
       </IconButton>
 

@@ -36,7 +36,10 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/login", "/api/auth/register", "/api/car/search", "/api/car/favoris", "/api/car/favoris/add", "/api/car/favoris/remove", "/api/car/disponible").permitAll()
+                        .requestMatchers("/api/auth/login", "/api/auth/register",
+                                "/api/car/search", "/api/car/favoris/add",
+                                "/api/car/favoris/remove", "/api/car/disponible" ,
+                                "/api/car/reservation").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)

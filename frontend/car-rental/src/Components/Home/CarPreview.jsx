@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect , useState } from 'react';
 import { Star, ChevronLeft } from 'lucide-react';
 import apiRequest from '../../apiRequest';
 
@@ -7,7 +7,7 @@ const CarPreview = () => {
 
     const car = JSON.parse(localStorage.getItem("selectedCar"));
 
-
+    
 
     const handleBook = () => {
         if(localStorage.getItem("token") === null){
@@ -20,6 +20,7 @@ const CarPreview = () => {
     }
 
     return (
+
         <div className="bg-gray-100 mt-3 min-h-screen">
             {/* Header Section */}
             <header className="relative h-[500px]">

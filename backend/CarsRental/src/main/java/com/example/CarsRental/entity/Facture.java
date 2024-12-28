@@ -20,4 +20,20 @@ public class Facture {
     @Getter
     @Setter
     Reservation reservation;
+
+    public float getMontantPaye() {
+        return montantPaye;
+    }
+
+    public void setMontantPaye(float montantPaye) {
+        this.montantPaye = montantPaye;
+    }
+
+    public Date getDatePaiement() {
+        return datePaiement;
+    }
+
+    public void setDatePaiement(Date datePaiement) {
+        this.datePaiement = datePaiement;
+    }
 }

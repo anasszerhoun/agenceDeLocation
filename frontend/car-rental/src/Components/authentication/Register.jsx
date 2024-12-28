@@ -215,7 +215,7 @@ function Register() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100 p-4">
+    <div className="min-h-screen  flex items-center justify-center bg-gradient-to-br p-4">
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-xl">
         <ProgressBar currentStep={currentStep} totalSteps={STEPS.length} />
         <Tabs

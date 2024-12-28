@@ -56,7 +56,6 @@ public class Client extends User {
     @OneToMany
     @JoinColumn(name="id_client")
     @Getter
-
     private List<Reservation> reservations = new ArrayList<>();
 
     @ManyToMany
@@ -70,5 +69,9 @@ public class Client extends User {
 
     public List<Vehicule> getVehiculesFavorites() {
         return vehiculesFavorites;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
     }
 }

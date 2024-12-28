@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   CalendarToday as CalendarIcon,
   DirectionsCar as CarIcon,
@@ -7,8 +7,9 @@ import {
   LocalGasStation as FuelIcon,
   AirlineSeatReclineNormal as SeatIcon,
   Settings as TransmissionIcon,
+
 } from "@mui/icons-material";
-import { Alert } from '@mui/material';
+import { Button, Alert } from '@mui/material';
 import Facture from "./Reservation/Facture";
 import axios from "axios"
 
@@ -37,7 +38,26 @@ const Reservation = () => {
   const [alert, setAlert] = useState(false);
 
 
+  var cont = false;
+  if (localStorage.getItem("contrat") !== null) {
+    cont = localStorage.getItem("contrat");
+    localStorage.removeItem("contrat");
+  }
+
+  const [contrat, setContrat] = useState(cont)
+
+  useEffect(() => {
+    if (contrat === "true") {
+      setContrat(true)
+      setAlert(false)
+      setShowFacture(true)
+    }
+  })
+
+
   const handleConfirmPayment = () => {
+    selectedCar.dateRange = { from: startDate, to: endDate };
+    localStorage.setItem("selectedCar", JSON.stringify(selectedCar));
     window.location.href = "/payment";
   };
 
@@ -48,7 +68,7 @@ const Reservation = () => {
 
   const handleCheckDispo = async () => {
 
-    
+
     const dispo = {
       id: reservation.idVehicule,
       startDate: startDate,
@@ -147,7 +167,7 @@ const Reservation = () => {
             </div>
           </div>
 
-          <div className="w-full lg:w-5/12 bg-gray-50 p-8">
+          {!contrat ? <div className="w-full lg:w-5/12 bg-gray-50 p-8">
             <div className="mb-8">
               <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                 Choisir les dates
@@ -188,7 +208,7 @@ const Reservation = () => {
                   <div className="bg-white rounded-xl shadow-sm p-6">
                     <Facture
                       price={selectedCar.tarif}
-                      dateRange={{from : startDate , to : endDate}}
+                      dateRange={{ from: startDate, to: endDate }}
                     />
                   </div>
                 </div>
@@ -212,6 +232,35 @@ const Reservation = () => {
               </button>
             </div>
           </div>
+            :
+            <div className="flex  justify-center items-center ml-14 mb-10">
+              <div
+                className="w-100 h-40 flex flex-col items-center justify-center   rounded-xl"
+              >
+
+                <Alert
+                  severity="success"
+                  sx={{
+                    marginTop: 2,
+                    width: "100%",
+                    height: "15vh", // Hauteur agrandie
+                    fontSize: "1.25rem", // Taille du texte agrandie
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center", // Centrer le texte verticalement et horizontalement
+                  }}
+                >
+                  Réservation est bien ajoutée
+                </Alert>
+                <button
+                  className="px-6 mt-5 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition duration-300"
+                >
+                  Télécharger le contrat
+                </button>
+              </div>
+            </div>
+          }
+
         </div>
       </div>
     </div>

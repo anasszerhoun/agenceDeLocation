@@ -1,10 +1,13 @@
 package com.example.CarsRental.controller;
 
 import com.example.CarsRental.dto.checkDispoDTO;
+import com.example.CarsRental.dto.factureReservationDTO;
 import com.example.CarsRental.entity.Client;
+import com.example.CarsRental.entity.Facture;
 import com.example.CarsRental.entity.Reservation;
 import com.example.CarsRental.entity.Vehicule;
 import com.example.CarsRental.service.clientService;
+import com.example.CarsRental.service.factureService;
 import com.example.CarsRental.service.reservationService;
 import com.example.CarsRental.service.vehiculeService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -30,12 +33,18 @@ public class Controller {
     private reservationService reservationServ;
     private clientService clientSer;
 
+    private factureService factureSer;
 
-    public Controller(vehiculeService service , reservationService reservationSer,clientService clientSer) {
+
+    public Controller(vehiculeService service , reservationService reservationSer
+            ,clientService clientSer,factureService factureSer) {
         this.service = service;
         this.reservationServ = reservationSer;
         this.clientSer = clientSer;
+        this.factureSer = factureSer;
     }
+
+
 
     @GetMapping("/search")
     public ResponseEntity<?> getData() throws ParseException, JsonProcessingException {
@@ -124,7 +133,41 @@ public class Controller {
         return ResponseEntity.ok(jsonResponse);
     }
 
+    @PostMapping("/reservation")
+    public ResponseEntity<?> addReservation(@RequestBody factureReservationDTO factReserv) throws ParseException {
 
+        Facture facture = new Facture();
+
+        Date date = new Date();
+        facture.setDatePaiement(date);
+        facture.setMontantPaye(factReserv.getTotalPrice());
+
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        factureSer.save(facture);
+
+        Optional<Vehicule> vehicule = service.findById(factReserv.getIdVehicule());
+
+        Date startDate = dateFormat.parse(factReserv.getStartDate());
+        Date endDate = dateFormat.parse(factReserv.getEndDate());
+
+        Reservation reservation = new Reservation();
+        reservation.setDateDebut(startDate);
+        reservation.setDateFin(endDate);
+        reservation.setVehicule(vehicule.get());
+        reservation.setFacture(facture);
+
+        String username = getAuthenticatedUsername();
+        Client client = clientSer.findByEmail(username);
+        client.getReservations().add(reservation);
+
+        reservationServ.save(reservation);
+        clientSer.save(client);
+
+
+        return ResponseEntity.ok(true);
+    }
    /* @PostMapping("/search")
     public ResponseEntity<?> searchByDate(@RequestBody searchDTO search) throws ParseException, JsonProcessingException {
 
