@@ -48,7 +48,7 @@ const Sidebar = ({currentPath}) => {
         <div className="sidebar-menu">
           <ul className="menu-list">
             <li className="menu-item">
-              <Link to="/Dashboard" className={currentPath === '/Dashboard' ? 'menu-link active' : 'menu-link'}>
+              <Link to="/dashboard" className={currentPath === '/dashboard' ? 'menu-link active' : 'menu-link'}>
                 <span className="menu-link-icon">
                   <MdOutlineGridView size={18} />
                 </span>
@@ -56,7 +56,7 @@ const Sidebar = ({currentPath}) => {
               </Link>
             </li>
             <li className="menu-item">
-              <Link to="/Vehicles" className={currentPath === '/Vehicles' ? 'menu-link active' : 'menu-link'}>
+              <Link to="/vehicles" className={currentPath.startsWith('/vehicles') ? 'menu-link active' : 'menu-link'}>
                 <span className="menu-link-icon">
                   <IoCarSport size={20} />
                 </span>
@@ -64,7 +64,7 @@ const Sidebar = ({currentPath}) => {
               </Link>
             </li>
             <li className="menu-item">
-              <Link to="/Admins" className={currentPath === '/Admins' ? 'menu-link active' : 'menu-link'}>
+              <Link to="/admins" className={currentPath.startsWith('/admins') ? 'menu-link active' : 'menu-link'}>
                 <span className="menu-link-icon">
                   <MdManageAccounts size={20} />
                 </span>

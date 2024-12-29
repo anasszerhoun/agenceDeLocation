@@ -6,4 +6,5 @@ import jakarta.persistence.*;
 @Table (name="admin")
 public class Admin extends User{
 
+
 }

@@ -1,6 +1,7 @@
 package com.example.CarsRental.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import com.example.CarsRental.dto.contratDTO;
 import com.example.CarsRental.dto.vehiculeDTO;
@@ -25,16 +26,28 @@ public class vehiculeController {
     public vehiculeDTO createVehicule(@RequestBody vehiculeDTO vehicule) {
         return vehiculeServ.createVehicule(vehicule);
     }
+    @PutMapping("/{im}")
+    public vehiculeDTO updateVehicule(@PathVariable String im , @RequestBody vehiculeDTO vehicule) {
+        return vehiculeServ.updateVehiculeByIm(im,vehicule);
+    }
 
     @GetMapping
     public List<vehiculeDTO> getAllVehicules() {
         return vehiculeServ.getAllVehicules();
     }
-    @GetMapping("/search")
-    public List<vehiculeDTO> getVehiculesByPriceRange( @RequestParam(required = true) float min,
-                                                       @RequestParam(required = true) float max)
+
+    @GetMapping("/{im}")
+    public vehiculeDTO getVehicule(@PathVariable String im) {
+        return vehiculeServ.getVehiculeByIm(im);
+    }
+
+    
+
+
+    @GetMapping("/marques")
+    public List <Map<String,Object>> getMarques()
     {
-        return vehiculeServ.getVehiculesByPriceRange(min, max);
+        return vehiculeServ.getPopularMarques();
     }
     @GetMapping("/contrat/{id}")
     public contratDTO getContrat(@PathVariable Long id )
@@ -43,27 +56,9 @@ public class vehiculeController {
     }
 
 
-
-
-
-
-
-
-
-
-    @GetMapping("/{id}")
-    public Vehicule getVehiculeById(@PathVariable Long id) {
-        return vehiculeServ.getVehicleById(id);
-    }
-
-//    @PutMapping("/{id}")
-//    public Vehicule updateVehicule(@PathVariable Long id, @RequestBody Vehicule vehicule) {
-//        return vehiculeServ.updateVehicule(id, vehicule);
-//    }
-
-    @DeleteMapping("/{id}")
-    public void deleteVehicule(@PathVariable Long id) {
-        vehiculeServ.deleteVehicule(id);
+    @DeleteMapping("/{im}")
+    public void deleteVehiculeByImmatricule(@PathVariable String im) {
+        vehiculeServ.deleteVehiculeByImmatricule(im);
     }
 
 }

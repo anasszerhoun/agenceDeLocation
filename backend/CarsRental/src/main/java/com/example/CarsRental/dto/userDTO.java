@@ -1,19 +1,10 @@
 package com.example.CarsRental.dto;
 
 public class userDTO {
-    private int idUser;
+
     private String nomUser;
     private String prenomUser;
     private String mail;
-    private String password;
-
-    public int getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
 
     public String getNomUser() {
         return nomUser;
@@ -37,13 +28,5 @@ public class userDTO {
 
     public void setMail(String mail) {
         this.mail = mail;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }
