@@ -37,16 +37,35 @@ const AreaTable = ({data}) => {
   const [alertMessage, setAlertMessage] = useState('');
   const [alertSeverity, setAlertSeverity] = useState('success'); // Can be 'success' or 'error'
 
+  // useEffect(() => {
+  //   if (location.state) {
+  //     if (location.state.addCarSuccess) {
+  //       setAlertMessage('Car added successfully!');
+  //       setAlertSeverity('success');
+  //     } else if (location.state.editCarSuccess) {
+  //       setAlertMessage('Car edited successfully!');
+  //       setAlertSeverity('success');
+  //     } else if (location.state.addCarSuccess === false || location.state.editCarSuccess === false) {
+  //       setAlertMessage('An error occurred: ' + (location.state.errorMessage || 'Operation failed.'));
+  //       setAlertSeverity('error');
+  //     }
+  //     setShowAlert(true);
+  //     const timer = setTimeout(() => {
+  //       setShowAlert(false);
+  //     }, 2000);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [location.state]);
   useEffect(() => {
     if (location.state) {
       if (location.state.addCarSuccess) {
-        setAlertMessage('Car added successfully!');
+        setAlertMessage(location.state.message || 'Operation successful!');
         setAlertSeverity('success');
       } else if (location.state.editCarSuccess) {
-        setAlertMessage('Car edited successfully!');
+        setAlertMessage(location.state.message || 'Operation successful!');
         setAlertSeverity('success');
-      } else if (location.state.error) {
-        setAlertMessage('An error occurred: ' + location.state.errorMessage);
+      } else if (location.state.addCarSuccess === false || location.state.editCarSuccess === false) {
+        setAlertMessage('An error occurred: ' + (location.state.errorMessage || 'Operation failed.'));
         setAlertSeverity('error');
       }
       setShowAlert(true);
@@ -56,7 +75,6 @@ const AreaTable = ({data}) => {
       return () => clearTimeout(timer);
     }
   }, [location.state]);
-
 
   const handleItemDeletion = async (id) => {
     try {

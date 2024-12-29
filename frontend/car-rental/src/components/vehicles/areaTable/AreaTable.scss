@@ -89,6 +89,9 @@
           &.dot-available {
             background-color: var(--green-color);
           }
+          &.dot-unavailable {
+            background-color:gray;
+          }
         }
 
         .dt-status-text {

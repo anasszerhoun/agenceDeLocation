@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useNavigate , useLocation } from "react-router-dom";
 import AreaTop from "../../components/dashboard/areaTop/AreaTop";
 
 function AddVehicule({ mode }) {
@@ -25,15 +24,6 @@ function AddVehicule({ mode }) {
   const location = useLocation();
   const { carData } = location.state || {};
   const navigate = useNavigate();
-  // const [formData, setFormData] = useState({
-  //   marque: mode === 'edit' && carData ? carData.marque : '',
-  //   modele: mode === 'edit' && carData ? carData.modele : '',
-  //   tarif: mode === 'edit' && carData ? carData.tarif : '',
-  //   type: mode === 'edit' && carData ? carData.type : 'essence',
-  //   immatriculation : mode === 'edit' && carData ? carData.immatriculation : '',
-  //   status : mode === 'edit' && carData ? carData.status : 'available',
-  // });
-
   const initialFormData = {
     marque: mode === 'edit' && carData ? carData.marque : '',
     modele: mode === 'edit' && carData ? carData.modele : '',
@@ -58,7 +48,7 @@ function AddVehicule({ mode }) {
         changedData[key] = formData[key];
       }
     }
-    console.log(changedData);
+    //console.log(changedData);
     try {
       const requestOptions = {
         method: mode === 'add' ? 'POST' : 'PUT',
@@ -69,12 +59,15 @@ function AddVehicule({ mode }) {
       const response = await fetch(`http://localhost:8080/vehicules${mode === 'edit' ? `/${carData.immatriculation}` : ''}`, requestOptions);
     
       if (!response.ok) {
-        navigate('/vehicles', { state: { addCarSuccess : false } });
+        throw new Error('Network response was not ok');
       }
-      navigate('/vehicles', { state: { addCarSuccess : true } });
+      // navigate('/vehicles', { state: { addCarSuccess : true } });
+      const successMessage = mode === 'add' ? 'Car added successfully!' : 'Car updated successfully!';
+      navigate('/vehicles', { state: { addCarSuccess: true, message: successMessage } });
       
     } catch (error) {
-      navigate('/vehicles', { state: { addCarSuccess : false } });
+      const errorMessage = mode === 'add' ? 'Failed to add car.' : 'Failed to update car.';
+      navigate('/vehicles', { state: { addCarSuccess: false, message: errorMessage } });
       console.error('Error saving car data:', error);
     }
   };
@@ -136,7 +129,7 @@ function AddVehicule({ mode }) {
                 <select name="type" className="form-select" value={formData.type} onChange={handleChange}>
                   <option value="essence">Essence</option>
                   <option value="diesel">Diesel</option>
-                  <option value="electrique">Électrique</option>
+                  <option value="electrique">Electrique</option>
                   <option value="hybride">Hybride</option>
                 </select>
               </div>
@@ -161,7 +154,7 @@ function AddVehicule({ mode }) {
                   <option value="Available">Available</option>
                   <option value="Rented">Rented</option>
                   <option value="Down">Down</option>
-                  <option value="Not Availabe">Not Available</option>
+                  <option value="Unavailable">Unavailable</option>
                 </select>
               </div>
             </div>
