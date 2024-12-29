@@ -83,7 +83,10 @@ function App() {
         </div>
        : <Navigate to="/login" />
       ),
-    },
+    },{
+      path:"/addCar",
+      element:<AddVehicule />
+    }
   ]);
 
   return (

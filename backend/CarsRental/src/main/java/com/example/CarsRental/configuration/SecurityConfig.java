@@ -31,13 +31,14 @@ public class SecurityConfig {
         this.jwtRequestFilter = jwtRequestFilter;
     }
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/login", "/api/auth/register",
-                                "/api/car/search", "/api/car/favoris/add",
+                                "/api/car/search","api/car/favoris", "/api/car/favoris/add",
                                 "/api/car/favoris/remove", "/api/car/disponible" ,
                                 "/api/car/reservation").permitAll()
                         .anyRequest().authenticated()
