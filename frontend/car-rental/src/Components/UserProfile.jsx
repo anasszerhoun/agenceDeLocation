@@ -5,7 +5,7 @@ import Historique from "./UserProfile/Historique";
 function UserProfile() {
   return (
     <>
-      <div className="cont">
+      <div className="cont w-100">
         <PersonalInformations />
         <hr />
         <Historique />

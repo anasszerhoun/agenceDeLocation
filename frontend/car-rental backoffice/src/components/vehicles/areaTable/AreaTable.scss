@@ -41,7 +41,7 @@
       width: 100%;
       border-collapse: collapse;
       color: var(--text-color-inverted);
-
+      
       
       td,
       th {
@@ -89,6 +89,9 @@
           &.dot-available {
             background-color: var(--green-color);
           }
+          &.dot-unavailable {
+            background-color:gray;
+          }
         }
 
         .dt-status-text {
@@ -104,7 +107,7 @@
   }
 
   .action-dropdown-menu {
-    position: absolute;
+    position:absolute;
     top: 100%;
     right: 50%;
     transform: translateX(50%);

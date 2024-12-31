@@ -7,15 +7,15 @@ const ConfirmationForm = ({ formData }) => {
       <div className="space-y-4 text-gray-700">
         <p>
           <strong className="block font-medium text-gray-900">Name:</strong>
-          {formData.name || "Not provided"}
+          {formData.prenomUser || "Not provided"}
         </p>
         <p>
           <strong className="block font-medium text-gray-900">Last Name:</strong>
-          {formData.lastname || "Not provided"}
+          {formData.nomUser || "Not provided"}
         </p>
         <p>
           <strong className="block font-medium text-gray-900">Date of Birth:</strong>
-          {formData.date_naissance || "Not provided"}
+          {formData.dateNaissance || "Not provided"}
         </p>
         <p>
           <strong className="block font-medium text-gray-900">Address:</strong>
@@ -23,7 +23,7 @@ const ConfirmationForm = ({ formData }) => {
         </p>
         <p>
           <strong className="block font-medium text-gray-900">Phone:</strong>
-          {formData.phone || "Not provided"}
+          {formData.numTelephone || "Not provided"}
         </p>
         <p>
           <strong className="block font-medium text-gray-900">CIN:</strong>
@@ -31,11 +31,11 @@ const ConfirmationForm = ({ formData }) => {
         </p>
         <p>
           <strong className="block font-medium text-gray-900">Driving License:</strong>
-          {formData.perme || "Not provided"}
+          {formData.permisConduire || "Not provided"}
         </p>
         <p>
           <strong className="block font-medium text-gray-900">Email:</strong>
-          {formData.email || "Not provided"}
+          {formData.mail || "Not provided"}
         </p>
       </div>
     </div>

@@ -12,18 +12,18 @@ const AddressForm = ({ formData, handleInputChange, errors }) => {
       />
       <Input
         label="Driving License"
-        name="perme"
-        value={formData.perme}
+        name="permisConduire"
+        value={formData.permisConduire}
         onChange={handleInputChange}
-        error={errors.perme}
+        error={errors.permisConduire}
       />
       <Input
         label="Email"
-        name="email"
+        name="mail"
         type="email"
-        value={formData.email}
+        value={formData.mail}
         onChange={handleInputChange}
-        error={errors.email}
+        error={errors.mail}
       />
       <Input
         label="Password"

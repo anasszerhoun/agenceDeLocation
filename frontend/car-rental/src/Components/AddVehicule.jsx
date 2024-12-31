@@ -18,8 +18,8 @@ function AddVehicule() {
     );
   };
   return (
-    <div className="container addVehicule border rounded shadow-lg p-4 mt-5 bg-light">
-      <div className="addVehicule-title mb-4 text-center">
+    <div className="container  border rounded shadow-lg p-4 mt-5 bg-light">
+      <div className=" mb-4 text-center">
         <h1 className="title">Ajouter une Voiture</h1>
         <p className="text-muted">Remplissez les informations nécessaires pour ajouter une nouvelle voiture.</p>
       </div>

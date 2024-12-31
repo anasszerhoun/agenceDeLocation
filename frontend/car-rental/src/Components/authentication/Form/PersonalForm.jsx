@@ -5,25 +5,25 @@ const PersonalForm = ({ formData, handleInputChange, errors }) => {
     <div>
       <Input
         label="Name"
-        name="name"
-        value={formData.name}
+        name="nomUser"
+        value={formData.nomUser}
         onChange={handleInputChange}
-        error={errors.name}
+        error={errors.nomUser}
       />
       <Input
         label="Last Name"
-        name="lastname"
-        value={formData.lastname}
+        name="prenomUser"
+        value={formData.prenomUser}
         onChange={handleInputChange}
-        error={errors.lastname}
+        error={errors.prenomUser}
       />
       <Input
         label="Date of Birth"
-        name="date_naissance"
+        name="dateNaissance"
         type="date"
-        value={formData.date_naissance}
+        value={formData.dateNaissance}
         onChange={handleInputChange}
-        error={errors.date_naissance}
+        error={errors.dateNaissance}
       />
       <Input
         label="Address"
@@ -34,11 +34,11 @@ const PersonalForm = ({ formData, handleInputChange, errors }) => {
       />
       <Input
         label="Phone"
-        name="phone"
+        name="numTelephone"
         type="tel"
-        value={formData.phone}
+        value={formData.numTelephone}
         onChange={handleInputChange}
-        error={errors.phone}
+        error={errors.numTelephone}
       />
     </div>
   );

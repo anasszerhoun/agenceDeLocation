@@ -1,43 +1,97 @@
+import AddVehicule from "./Components/AddVehicule";
+import "./Style/App.css";
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./Components/Header";
-import Home from "./Components/Home/Home";
+import PersonalInformations from "./Components/UserProfile/PersonalInformations";
+import UserProfile from "./Components/UserProfile";
+import Reservation from "./Components/Reservation";
 import Login from "./Components/authentication/Login";
 import Register from "./Components/authentication/Register";
-import UserProfile from "./Components/UserProfile";
-import PersonalInformations from "./Components/UserProfile/PersonalInformations";
-import Reservation from "./Components/Reservation";
+import Home from "./Components/Home/Home";
 import CarPreview from "./Components/Home/CarPreview";
-import CheckoutPage from "./Components/Pay/CheckoutPage";
-import AddVehicule from "./Components/AddVehicule";
+import CheckoutPage from "./Components/Payment/CheckoutPage";
 
-// Import styles
-import "./Style/App.css";
-import "./Style/global.scss";
-import "./index.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import Header from "./Components/header/Header";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
+
+const isAuthenticated = () => {
+  const token = localStorage.getItem("token");
+  return token !== null;
+};
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <div>
+          <Home />
+        </div>
+      ),
+    },
+    {
+      path: "/profile",
+      element: isAuthenticated() ? <><Header/><UserProfile /></> : <Navigate to="/login" />, // Rediriger si non authentifié
+    },
+    {
+      path: "/reservation",
+      element: isAuthenticated() ? (
+        <div>
+          <Header />
+          <Reservation />
+        </div>
+      ) : (
+        <Navigate to="/login" />
+      ),
+    },
+    {
+      path: "/login",
+      element: isAuthenticated() ? <Navigate to="/home" /> : <Login />,
+    },
+    {
+      path: "/register",
+      element: <Register />,
+    },
+    {
+      path: "/home",
+      element: (
+        <div>
+          <Header />
+          <Home />
+        </div>
+      )
+    },
+    {
+      path: "/carPreview",
+      element:  ( 
+              <div>
+                <Header />
+                <CarPreview />
+              </div>
+            )
+    },
+    {
+      path: "/payment",
+      element: (
+          isAuthenticated() ? 
+        <div>
+          <Header />
+          <CheckoutPage />
+        </div>
+       : <Navigate to="/login" />
+      ),
+    },{
+      path:"/addCar",
+      element:<AddVehicule />
+    }
+  ]);
+
   return (
-    <div className="container App w-100 h-100">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/header" element={<Header />} />
-
-          <Route path="/profile" element={<UserProfile />}>
-            <Route path="personal-info" element={<PersonalInformations />} />
-          </Route>
-
-          <Route path="/reservation" element={<Reservation />} />
-          <Route path="/car-preview" element={<CarPreview />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/pay" element={<CheckoutPage />} />
-          <Route path="/add-vehicle" element={<AddVehicule />} />
-        </Routes>
-      </Router>
+    <div className="container App w-100 h-100 ">
+      <RouterProvider router={router}></RouterProvider>
     </div>
   );
 }

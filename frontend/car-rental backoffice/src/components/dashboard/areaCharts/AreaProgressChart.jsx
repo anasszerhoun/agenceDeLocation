@@ -1,45 +1,55 @@
-const data = [
-  {
-    id: 1,
-    name: "Jeans",
-    percentValues: 70,
-  },
-  {
-    id: 2,
-    name: "Shirts",
-    percentValues: 40,
-  },
-  {
-    id: 3,
-    name: "Belts",
-    percentValues: 60,
-  },
-  {
-    id: 4,
-    name: "Caps",
-    percentValues: 80,
-  },
-  {
-    id: 5,
-    name: "Others",
-    percentValues: 20,
-  },
-];
+import React, { useState, useEffect } from 'react';
 
 const AreaProgressChart = () => {
+  const [rentalData, setRentalData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [marqueResponse, carsResponse] = await Promise.all([
+          fetch('http://localhost:8080/dashboard/marques'),
+          fetch('http://localhost:8080/dashboard/all_reservations')
+        ]);
+
+        const marqueData = await marqueResponse.json();
+        const carsData = await carsResponse.json();
+
+        // Calculate percentage for each marque based on total cars
+        const processedData = marqueData.map((item, index) => ({
+          id: index + 1,
+          name: item.marque,
+          percentValues: Math.round((item.numberOfRent / carsData.length) * 100)
+        }));
+
+        setRentalData(processedData);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div className="progress-bar">Loading...</div>;
+  }
+
   return (
     <div className="progress-bar">
       <div className="progress-bar-info">
-        <h4 className="progress-bar-title">Most Sold Items</h4>
+        <h4 className="progress-bar-title">Most Rented Cars</h4>
       </div>
       <div className="progress-bar-list">
-        {data?.map((progressbar) => {
+        {rentalData?.map((progressbar) => {
           return (
             <div className="progress-bar-item" key={progressbar.id}>
               <div className="bar-item-info">
                 <p className="bar-item-info-name">{progressbar.name}</p>
                 <p className="bar-item-info-value">
-                  {progressbar.percentValues}
+                  {progressbar.percentValues} %
                 </p>
               </div>
               <div className="bar-item-full">

@@ -9,6 +9,8 @@ import  Dashboard  from "./screens/dashboard/DashboardScreen";
 import  PageNotFound  from "./screens/error/PageNotFound";
 import Vehicles from "./screens/vehicles/VehiclesList";
 import Admins from "./screens/admins/AdminsList";
+import AddVehicule from "./screens/vehicles/AddVehicule";
+import AddAdmin from "./screens/admins/addAdmin";
 
 function App() {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -25,9 +27,12 @@ function App() {
       <Router>
         <Routes>
           <Route element={<BaseLayout />}>
-            <Route path="/Dashboard" element={<Dashboard />} />
-            <Route path="/Vehicles" element={<Vehicles/>} />
-            <Route path="/Admins" element={<Admins/>} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/vehicles" element={<Vehicles/>} />
+            <Route path="/vehicles/add" element={<AddVehicule mode="add"/>} />
+            <Route path="/vehicles/edit" element={<AddVehicule mode="edit"/>} />
+            <Route path="/admins" element={<Admins/>} />
+            <Route path="/admins/add" element={<AddAdmin/>} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>
@@ -40,11 +45,11 @@ function App() {
           <img
             className="theme-icon"
             src={theme === "light" ? SunIcon : MoonIcon}
+            alt=""
           />
         </button>
       </Router>
     </>
   );
 }
-
 export default App;
