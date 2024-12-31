@@ -1,6 +1,8 @@
 package com.example.CarsRental.entity;
 
 import java.util.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,6 +13,8 @@ public class Client extends User {
     private String numTelephone;
     private String cin;
     private String permisConduire;
+
+    @JsonBackReference
     @OneToMany(mappedBy = "client")
     private List<Reservation> reservations ;
 
@@ -24,6 +28,14 @@ public class Client extends User {
 
     public Date getDateNaissance() {
         return dateNaissance;
+    }
+
+    public String getNumTelephone() {
+        return numTelephone;
+    }
+
+    public void setNumTelephone(String numTelephone) {
+        this.numTelephone = numTelephone;
     }
 
     public void setDateNaissance(Date dateNaissance) {

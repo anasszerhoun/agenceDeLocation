@@ -1,6 +1,8 @@
 package com.example.CarsRental.entity;
 
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 
@@ -17,6 +19,7 @@ public class Reservation {
     private Date dateFin;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
     @JoinColumn(name="facture_id")
     private Facture facture;
 

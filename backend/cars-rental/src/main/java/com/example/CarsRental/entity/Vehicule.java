@@ -2,6 +2,7 @@ package com.example.CarsRental.entity;
 
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
@@ -31,8 +32,9 @@ public class Vehicule {
     @JsonProperty("tarif")
     private float tarif;
 
-    @ManyToMany(mappedBy = "vehiculesFavorites")
-    private  List<Client> Fans;
+//    @JsonManagedReference
+//    @ManyToMany(mappedBy = "vehiculesFavorites")
+//    private  List<Client> Fans;
 
     public int getId_vehicule() {
         return id_vehicule;
@@ -97,12 +99,12 @@ public class Vehicule {
 //    public void setImageUrl(String imageUrl) {
 //        this.imageUrl = imageUrl;
 //    }
-
-    public List<Client> getFans() {
-        return Fans;
-    }
-
-    public void setFans(List<Client> fans) {
-        Fans = fans;
-    }
+//
+//    public List<Client> getFans() {
+//        return Fans;
+//    }
+//
+//    public void setFans(List<Client> fans) {
+//        Fans = fans;
+//    }
 }

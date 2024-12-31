@@ -1,6 +1,8 @@
 package com.example.CarsRental.entity;
 
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,6 +16,7 @@ public class Facture {
     private Date datePaiement;
 
     @OneToOne(mappedBy = "facture")
+    @JsonBackReference
     private Reservation reservation;
 
     public int getIdFacture() {
