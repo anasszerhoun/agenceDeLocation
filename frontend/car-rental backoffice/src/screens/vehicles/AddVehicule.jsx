@@ -3,8 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import AreaTop from "../../components/dashboard/areaTop/AreaTop";
 
 function AddVehicule({ mode }) {
-  const [selectedImages, setSelectedImages] = useState([]);
-  const [imageFiles, setImageFiles] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
   const location = useLocation();
   const { carData } = location.state || {};
   const navigate = useNavigate();
@@ -16,21 +16,22 @@ function AddVehicule({ mode }) {
     type: mode === 'edit' && carData ? carData.type : 'essence',
     immatriculation: mode === 'edit' && carData ? carData.immatriculation : '',
     status: mode === 'edit' && carData ? carData.status : 'available',
-    imageUrls: mode === 'edit' && carData ? carData.imageUrls : []
+    imageUrl: mode === 'edit' && carData ? carData.imageUrl : ''
   };
 
   const [formData, setFormData] = useState(initialFormData);
 
   const handleImageChange = (event) => {
-    const files = Array.from(event.target.files);
-    setImageFiles(prev => [...prev, ...files]);
-    const newImages = files.map(file => URL.createObjectURL(file));
-    setSelectedImages(prev => [...prev, ...newImages]);
+    const file = event.target.files[0];
+    if (file) {
+      setImageFile(file);
+      setSelectedImage(URL.createObjectURL(file));
+    }
   };
 
-  const removeImage = (index) => {
-    setSelectedImages(prev => prev.filter((_, i) => i !== index));
-    setImageFiles(prev => prev.filter((_, i) => i !== index));
+  const removeImage = () => {
+    setSelectedImage(null);
+    setImageFile(null);
   };
 
   const handleChange = (e) => {
@@ -43,29 +44,42 @@ function AddVehicule({ mode }) {
 
     try {
       const formDataToSend = new FormData();
-      formDataToSend.append('vehicule', JSON.stringify(formData));
 
-      imageFiles.forEach((file) => {
-        formDataToSend.append('images', file);
+      // Create a Blob from the JSON data with the correct content type
+      const vehiculeBlob = new Blob(
+        [JSON.stringify(formData)],
+        { type: 'application/json' }
+      );
+
+      // Append the JSON blob with the correct name
+      formDataToSend.append('vehicule', vehiculeBlob);
+
+      if (imageFile) {
+        formDataToSend.append('image', imageFile);
+      }
+
+      const response = await fetch('http://localhost:8080/vehicules/vehicules', {
+        method: 'POST',
+        body: formDataToSend,
+        // Don't set Content-Type header - browser will set it automatically with boundary
       });
 
-      const url = `http://localhost:8080/vehicules${mode === 'edit' ? `/${carData.immatriculation}` : ''}`;
-      const method = mode === 'add' ? 'POST' : 'PUT';
+      if (!response.ok) {
+        const errorData = await response.text();
+        throw new Error(`Network response was not ok: ${errorData}`);
+      }
 
-      const response = await fetch(url, {
-        method: method,
-        body: formDataToSend
-      });
-
-      if (!response.ok) throw new Error('Network response was not ok');
-
-      const successMessage = mode === 'add' ? 'Car added successfully!' : 'Car updated successfully!';
+      const successMessage = 'Car added successfully!';
       navigate('/vehicles', { state: { addCarSuccess: true, message: successMessage } });
 
     } catch (error) {
-      const errorMessage = mode === 'add' ? 'Failed to add car.' : 'Failed to update car.';
-      navigate('/vehicles', { state: { addCarSuccess: false, message: errorMessage } });
       console.error('Error saving car data:', error);
+      navigate('/vehicles', {
+        state: {
+          addCarSuccess: false,
+          message: `Failed to add car. ${error.message}`
+        }
+      });
     }
   };
 
@@ -81,43 +95,45 @@ function AddVehicule({ mode }) {
           <div className="informations-vehicule">
             <div className="row gy-4">
               <div className="col-12 mb-4">
-                <label htmlFor="images" className="form-label">Car Images</label>
-                <input
-                  type="file"
-                  id="images"
-                  multiple
-                  accept="image/*"
-                  className="form-control mb-3"
-                  onChange={handleImageChange}
-                />
+                <label htmlFor="image" className="form-label">Car Image</label>
+                {mode === 'add' && (
+                  <input
+                    type="file"
+                    id="image"
+                    accept="image/*"
+                    className="form-control mb-3"
+                    onChange={handleImageChange}
+                    required
+                  />
+                )}
                 <div className="d-flex flex-wrap gap-3">
-                  {selectedImages.map((image, index) => (
-                    <div key={index} className="position-relative">
+                  {selectedImage && (
+                    <div className="position-relative">
                       <img
-                        src={image}
-                        alt={`Car preview ${index + 1}`}
+                        src={selectedImage}
+                        alt="Car preview"
                         style={{ width: '150px', height: '100px', objectFit: 'cover' }}
                         className="rounded"
                       />
                       <button
                         type="button"
                         className="btn btn-danger btn-sm position-absolute top-0 end-0"
-                        onClick={() => removeImage(index)}
+                        onClick={removeImage}
                       >
                         ×
                       </button>
                     </div>
-                  ))}
-                  {mode === 'edit' && carData?.imageUrls?.map((url, index) => (
-                    <div key={`existing-${index}`} className="position-relative">
+                  )}
+                  {mode === 'edit' && carData?.imageUrl && !selectedImage && (
+                    <div className="position-relative">
                       <img
-                        src={url}
-                        alt={`Existing car image ${index + 1}`}
+                        src={carData.imageUrl}
+                        alt="Existing car image"
                         style={{ width: '150px', height: '100px', objectFit: 'cover' }}
                         className="rounded"
                       />
                     </div>
-                  ))}
+                  )}
                 </div>
               </div>
 

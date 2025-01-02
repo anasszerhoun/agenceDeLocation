@@ -20,217 +20,6 @@ const Home = () => {
         { name: 'Honda', icon: '🏎️' },
     ];
 
-
-    // const carData = [
-    //     {
-    //         name: 'T-Cross - 2023',
-    //         description: '4.0 D5 PowerPulse Momentum 5dr AWD ',
-    //         miles: 15,
-    //         fuelType: 'Petrol',
-    //         transmission: 'CVT',
-    //         year: 2023,
-    //         price: 15000,
-    //         image: 'imageCar.png',
-    //         brand: 'Volkswagen'
-    //     }, {
-    //         name: 'T-Cross - 2023',
-    //         description: '4.0 D5 PowerPulse Momentum 5dr AWD ',
-    //         miles: 15,
-    //         fuelType: 'Petrol',
-    //         transmission: 'CVT',
-    //         year: 2023,
-    //         price: 15000,
-    //         image: 'imageCar.png',
-    //         brand: 'Volkswagen'
-    //     }, {
-    //         name: 'T-Cross - 2023',
-    //         description: '4.0 D5 PowerPulse Momentum 5dr AWD ',
-    //         miles: 15,
-    //         fuelType: 'Petrol',
-    //         transmission: 'CVT',
-    //         year: 2023,
-    //         price: 15000,
-    //         image: 'imageCar.png',
-    //         brand: 'Volkswagen'
-    //     }, {
-    //         name: 'T-Cross - 2023',
-    //         description: '4.0 D5 PowerPulse Momentum 5dr AWD ',
-    //         miles: 15,
-    //         fuelType: 'Petrol',
-    //         transmission: 'CVT',
-    //         year: 2023,
-    //         price: 15000,
-    //         image: 'imageCar.png',
-    //         brand: 'Volkswagen'
-    //     }, {
-    //         name: 'T-Cross - 2023',
-    //         description: '4.0 D5 PowerPulse Momentum 5dr AWD ',
-    //         miles: 15,
-    //         fuelType: 'Petrol',
-    //         transmission: 'CVT',
-    //         year: 2023,
-    //         price: 15000,
-    //         image: 'imageCar.png',
-    //         brand: 'Volkswagen'
-    //     }, {
-    //         name: 'T-Cross - 2023',
-    //         description: '4.0 D5 PowerPulse Momentum 5dr AWD ',
-    //         miles: 15,
-    //         fuelType: 'Petrol',
-    //         transmission: 'CVT',
-    //         year: 2023,
-    //         price: 15000,
-    //         image: 'imageCar.png',
-    //         brand: 'Volkswagen'
-    //     }, {
-    //         name: 'T-Cross - 2023',
-    //         description: '4.0 D5 PowerPulse Momentum 5dr AWD ',
-    //         miles: 15,
-    //         fuelType: 'Petrol',
-    //         transmission: 'CVT',
-    //         year: 2023,
-    //         price: 15000,
-    //         image: 'imageCar.png',
-    //         brand: 'Volkswagen'
-    //     }, {
-    //         name: 'T-Cross - 2023',
-    //         description: '4.0 D5 PowerPulse Momentum 5dr AWD ',
-    //         miles: 15,
-    //         fuelType: 'Petrol',
-    //         transmission: 'CVT',
-    //         year: 2023,
-    //         price: 15000,
-    //         image: 'imageCar.png',
-    //         brand: 'Volkswagen'
-    //     }, {
-    //         name: 'T-Cross - 2023',
-    //         description: '4.0 D5 PowerPulse Momentum 5dr AWD ',
-    //         miles: 15,
-    //         fuelType: 'Petrol',
-    //         transmission: 'CVT',
-    //         year: 2023,
-    //         price: 15000,
-    //         image: 'imageCar.png',
-    //         brand: 'Volkswagen'
-    //     }, {
-    //         name: 'T-Cross - 2023',
-    //         description: '4.0 D5 PowerPulse Momentum 5dr AWD ',
-    //         miles: 15,
-    //         fuelType: 'Petrol',
-    //         transmission: 'CVT',
-    //         year: 2023,
-    //         price: 15000,
-    //         image: 'imageCar.png',
-    //         brand: 'Volkswagen'
-    //     },
-    //     {
-    //         name: 'T-Cross - 2023',
-    //         description: '4.0 D5 PowerPulse Momentum 5dr AWD ',
-    //         miles: 15,
-    //         fuelType: 'Petrol',
-    //         transmission: 'CVT',
-    //         year: 2023,
-    //         price: 15000,
-    //         image: 'imageCar.png',
-    //         brand: 'Volkswagen'
-    //     },
-    //     {
-    //         name: 'T-Cross - 2023',
-    //         description: '4.0 D5 PowerPulse Momentum 5dr AWD ',
-    //         miles: 15,
-    //         fuelType: 'Petrol',
-    //         transmission: 'CVT',
-    //         year: 2023,
-    //         price: 15000,
-    //         image: 'imageCar.png',
-    //         brand: 'Volkswagen'
-    //     },
-    //     {
-    //         name: 'T-Cross - 2023',
-    //         description: '4.0 D5 PowerPulse Momentum 5dr AWD ',
-    //         miles: 15,
-    //         fuelType: 'Petrol',
-    //         transmission: 'CVT',
-    //         year: 2023,
-    //         price: 15000,
-    //         image: 'imageCar.png',
-    //         brand: 'Volkswagen'
-    //     },
-    //     {
-    //         name: 'T-Cross - 2023',
-    //         description: '4.0 D5 PowerPulse Momentum 5dr AWD ',
-    //         miles: 15,
-    //         fuelType: 'Petrol',
-    //         transmission: 'CVT',
-    //         year: 2023,
-    //         price: 15000,
-    //         image: 'imageCar.png',
-    //         brand: 'Volkswagen'
-    //     },
-    //     {
-    //         name: 'T-Cross - 2023',
-    //         description: '4.0 D5 PowerPulse Momentum 5dr AWD ',
-    //         miles: 15,
-    //         fuelType: 'Petrol',
-    //         transmission: 'CVT',
-    //         year: 2023,
-    //         price: 15000,
-    //         image: 'imageCar.png',
-    //         brand: 'Volkswagen'
-    //     },
-    //     {
-    //         name: 'T-Cross - 2023',
-    //         description: '4.0 D5 PowerPulse Momentum 5dr AWD ',
-    //         miles: 15,
-    //         fuelType: 'Petrol',
-    //         transmission: 'CVT',
-    //         year: 2023,
-    //         price: 15000,
-    //         image: 'imageCar.png',
-    //         brand: 'Volkswagen'
-    //     },
-    //     {
-    //         name: 'T-Cross - 2023',
-    //         description: '4.0 D5 PowerPulse Momentum 5dr AWD ',
-    //         miles: 15,
-    //         fuelType: 'Petrol',
-    //         transmission: 'CVT',
-    //         year: 2023,
-    //         price: 15000,
-    //         image: 'imageCar.png',
-    //         brand: 'Volkswagen'
-    //     }, {
-    //         name: '-Cross - 2023',
-    //         description: '4.0 D5 PowerPulse Momentum 5dr AWD ',
-    //         miles: 15,
-    //         fuelType: 'Petrol',
-    //         transmission: 'CVT',
-    //         year: 2023,
-    //         price: 15000,
-    //         image: 'imageCar.png',
-    //         brand: 'Volkswagen'
-    //     }, {
-    //         name: 'T-Cross - 2023',
-    //         description: '4.0 D5 PowerPulse Momentum 5dr AWD ',
-    //         miles: 15,
-    //         fuelType: 'Petrol',
-    //         transmission: 'CVT',
-    //         year: 2023,
-    //         price: 15000,
-    //         image: 'imageCar.png',
-    //         brand: 'Volkswagen'
-    //     }, {
-    //         name: 'T-Cross - 2023',
-    //         description: '4.0 D5 PowerPulse Momentum 5dr AWD ',
-    //         miles: 15,
-    //         fuelType: 'Petrol',
-    //         transmission: 'CVT',
-    //         year: 2023,
-    //         price: 15000,
-    //         image: 'imageCar.png',
-    //         brand: 'Volkswagen'
-    //     },];
-
     // Filtered and paginated cars
     const filteredCars = useMemo(() => {
         return carData.filter(car =>
@@ -243,64 +32,41 @@ const Home = () => {
         );
     }, [searchTerm, priceFilter]);
 
-    // Pagination
     const paginatedCars = useMemo(() => {
         const startIndex = (currentPage - 1) * itemsPerPage;
         return filteredCars.slice(startIndex, startIndex + itemsPerPage);
     }, [filteredCars, currentPage]);
 
-    // Total pages calculation
     const totalPages = Math.ceil(filteredCars.length / itemsPerPage);
 
-    // const sendData = async (data) => {
-    //     const res = await axios.post(
-    //       "http://localhost:8080/api/car/search",data,{
-    //         headers: {
-    //           "Content-Type": "application/json",  
-    //         },
-    //     }
-    //     );
-    //     if(res.data){
-    //         setCarData(res.data);
-    //     }
-    // }
+
 
     const getData = async () => {
         const res = await axios.get(
-          "http://localhost:8080/api/car/search",{
+            "http://localhost:8080/api/car/search", {
             headers: {
-              "Content-Type": "application/json",  
+                "Content-Type": "application/json",
             },
         }
         );
-        if(res.data){
+        if (res.data) {
             setCarData(res.data);
+            console.log(res.data);
         }
     }
     useEffect(() => {
         getData();
     }, []);
 
-    // const handleSearch = () => {
-    //     if(endDate==="" && startDate ===""){
-    //         console.log("Veuillez choisir la date")
-    //     }
-    //     else{
-    //         const data = {
-    //             startDate: startDate,
-    //             endDate: endDate,
-    //         }
-    //         sendData(data);
-    //     }
-    // }
+
 
     const handleChoose = (index) => {
-        
-        const selectedCar = carData[index];
-        
 
-        localStorage.setItem("selectedCar",JSON.stringify(selectedCar));
-        window.location.href="/carPreview";
+        const selectedCar = carData[index];
+
+
+        localStorage.setItem("selectedCar", JSON.stringify(selectedCar));
+        window.location.href = "/carPreview";
     }
 
     return (
@@ -374,17 +140,13 @@ const Home = () => {
                         />
                     </div>
                 </div>
-                {/* <div className='align-center'>
-                    <button className='btn btn-primary' onClick={handleSearch}>Search</button>
-                </div> */}
             </section>
-
             <section className="py-16">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {carData.map((car, index) => (
                             <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
-                                <img src="./imageCar.png" alt={car.marque} className="w-full h-48 object-cover" />
+                                <img src={car.imageUrl} alt={car.marque} className="w-full h-48 object-cover" />
                                 <div className="p-6">
                                     <h3 className="text-xl font-semibold mb-2">{car.marque}</h3>
                                     <p className="text-gray-600 mb-4">{car.modele}</p>
@@ -404,7 +166,7 @@ const Home = () => {
 
                                     <div className="flex justify-between items-center">
                                         <span className="text-2xl font-bold">{car.tarif}DH</span>
-                                        <button className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition duration-300" onClick={()=>handleChoose(index)}>
+                                        <button className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition duration-300" onClick={() => handleChoose(index)}>
                                             View Details
                                         </button>
                                     </div>

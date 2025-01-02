@@ -8,7 +8,7 @@ export function CheckoutPage() {
     const [selectedCountry, setSelectedCountry] = useState('United States')
 
     const selectedCar = JSON.parse(localStorage.getItem("selectedCar"));
-
+    console.log("heeere",selectedCar);
 
     const { from, to } = selectedCar.dateRange;
 
@@ -88,7 +88,7 @@ export function CheckoutPage() {
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-16 h-16 bg-gray-200 rounded">
                                     <img
-                                        src="imageCar.png"
+                                        src={selectedCar.imageUrl}
                                         alt={selectedCar.marque}
                                         className="w-full h-full object-cover rounded"
                                     />

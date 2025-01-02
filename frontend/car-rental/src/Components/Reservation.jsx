@@ -9,6 +9,7 @@ import {
   Settings as TransmissionIcon,
 
 } from "@mui/icons-material";
+import Contract from './Contract';
 import { Button, Alert } from '@mui/material';
 import Facture from "./Reservation/Facture";
 import axios from "axios"
@@ -20,7 +21,7 @@ const Reservation = () => {
     idVehicule: selectedCar.idVehicule,
     carModel: selectedCar.modele,
     carMarque: selectedCar.marque,
-    images: ["/img1.jpeg", "/img2.jpeg", "/img3.jpeg"],
+    images: selectedCar.imageUrl,
     dateRange: { from: new Date(2025, 1, 17), to: new Date(2025, 1, 23) },
     price: selectedCar.tarif,
     details: {
@@ -118,28 +119,13 @@ const Reservation = () => {
             <div className="mb-8">
               <div className="relative rounded-2xl overflow-hidden shadow-lg">
                 <img
-                  src={reservation.images[currentImageIndex]}
+                  src={reservation.images}
                   alt={`Car ${currentImageIndex + 1}`}
                   className="w-full h-96 object-cover transition-transform duration-500 ease-in-out transform hover:scale-105"
                 />
               </div>
 
-              <div className="flex space-x-2 mt-4 overflow-x-auto pb-2">
-                {reservation.images.map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentImageIndex(index)}
-                    className={`w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 focus:outline-none ${index === currentImageIndex ? "ring-2 ring-blue-500" : ""
-                      }`}
-                  >
-                    <img
-                      src={image}
-                      alt={`Thumbnail ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
+              
             </div>
 
             <div className="grid grid-cols-3 gap-4">
@@ -252,11 +238,7 @@ const Reservation = () => {
                 >
                   Réservation est bien ajoutée
                 </Alert>
-                <button
-                  className="px-6 mt-5 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition duration-300"
-                >
-                  Télécharger le contrat
-                </button>
+                <Contract />
               </div>
             </div>
           }

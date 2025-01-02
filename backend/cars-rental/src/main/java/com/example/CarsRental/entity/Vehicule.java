@@ -20,7 +20,7 @@ public class Vehicule {
     @JsonProperty("immatriculation")
     private String immatriculation;
 
-//    private String imageUrl;
+    private String imageUrl;
     @JsonProperty("marque")
     private String marque;
     @JsonProperty("modele")
@@ -32,9 +32,8 @@ public class Vehicule {
     @JsonProperty("tarif")
     private float tarif;
 
-//    @JsonManagedReference
-//    @ManyToMany(mappedBy = "vehiculesFavorites")
-//    private  List<Client> Fans;
+    @ManyToMany(mappedBy = "vehiculesFavorites")
+    private  List<Client> Fans;
 
     public int getId_vehicule() {
         return id_vehicule;
@@ -92,13 +91,13 @@ public class Vehicule {
         this.tarif = tarif;
     }
 
-//    public String getImageUrl() {
-//        return imageUrl;
-//    }
-//
-//    public void setImageUrl(String imageUrl) {
-//        this.imageUrl = imageUrl;
-//    }
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 //
 //    public List<Client> getFans() {
 //        return Fans;
