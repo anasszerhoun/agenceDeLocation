@@ -6,6 +6,7 @@ import com.example.CarsRental.entity.Reservation;
 import com.example.CarsRental.entity.Vehicule;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -15,6 +16,9 @@ import java.util.List;
 public interface reservationRepository extends JpaRepository<Reservation,Long> {
 
     List<Reservation> findByVehicule(Vehicule vehicule);
+
+    @Query("SELECT r FROM Reservation r WHERE r.client.mail = :email")
+    List<Reservation> findByClientEmail(@Param("email") String email);
 
     List<Reservation> findByDateDebutLessThanEqualAndDateFinGreaterThanEqual(
             Date currentDate, Date currentDate2);

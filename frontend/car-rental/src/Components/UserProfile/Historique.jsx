@@ -1,100 +1,26 @@
-// import React from "react";
-
-// function Historique() {
-//   return (
-//     <div className="historique-location">
-//       <div className="header">
-//         <h4>Réservations : </h4>
-//       </div>
-//       <div className="list-historique">
-//         <div className="reservation d-flex">
-//           <div className="voiture col-3">
-//             <img src="/car.svg" alt="" style={{width:"70px",height:"70px"}}/>
-//           </div>
-//           <div className="info col-6">
-//             <div className="nom-voiture">
-//               <h2>Renault Clio</h2>
-//             </div>
-//             <div className="date d-flex">
-//               <span>De : 10/12/2024 - </span>
-//               <span>3 jours</span>
-//             </div>
-//             <div className="status active d-flex">
-//               <span>Active </span>
-//             </div>
-//           </div>
-//           <div className="prix col-3">
-//               <span>900 DH</span>
-//           </div>
-//         </div>
-//         <div className="reservation d-flex">
-//           <div className="voiture col-3">
-//             <img src="/car.svg" alt="" style={{width:"70px",height:"70px"}}/>
-//           </div>
-//           <div className="info col-6">
-//             <div className="nom-voiture">
-//               <h2>Renault Clio</h2>
-//             </div>
-//             <div className="date d-flex">
-//               <span>De : 10/12/2024 - </span>
-//               <span>3 jours</span>
-//             </div>
-//             <div className="status Nonactive d-flex">
-//               <span>NonActive</span>
-//             </div>
-//           </div>
-//           <div className="prix col-3">
-//               <span>900 DH</span>
-//           </div>
-//         </div><div className="reservation d-flex">
-//           <div className="voiture col-3">
-//             <img src="/car.svg" alt="" style={{width:"70px",height:"70px"}}/>
-//           </div>
-//           <div className="info col-6">
-//             <div className="nom-voiture">
-//               <h2>Renault Clio</h2>
-//             </div>
-//             <div className="date d-flex">
-//               <span>De : 10/12/2024 - </span>
-//               <span>3 jours</span>
-//             </div>
-//             <div className="status active d-flex">
-//               <span>Active </span>
-//             </div>
-//           </div>
-//           <div className="prix col-3">
-//               <span>900 DH</span>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Historique;
-
 import React from "react";
-import { Car, Calendar, CheckCircle, XCircle, CreditCard, Sparkles, Star } from 'lucide-react';
+import { Car, Calendar, CheckCircle, XCircle, CreditCard, Star } from 'lucide-react';
 
-const reservations = [
-  { id: 1, carName: "Renault Clio", startDate: "2024-12-10", duration: 3, status: "active", price: 900 },
-  { id: 2, carName: "Peugeot 208", startDate: "2024-11-15", duration: 5, status: "inactive", price: 1200 },
-  { id: 3, carName: "Volkswagen Golf", startDate: "2024-12-20", duration: 2, status: "active", price: 800 },
-  { id: 4, carName: "Dacia Duster", startDate: "2025-01-05", duration: 7, status: "active", price: 1500 },
-];
 
-function ReservationHistory() {
+function ReservationHistory({ res }) {
+
+
   return (
     <div className="min-h-screen bg-gradient-to-br  py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-12 relative">
           Historique des Réservations
-      
+
         </h1>
         <div className="space-y-8">
-          {reservations.map((reservation) => (
-            <ReservationCard key={reservation.id} reservation={reservation} />
+          {Array.isArray(res) && res.map((reservation) => (
+            <ReservationCard
+              key={reservation.idReservation}
+              reservation={reservation}
+            />
           ))}
+
+
         </div>
       </div>
     </div>
@@ -114,15 +40,17 @@ function ReservationCard({ reservation }) {
               <Car className="w-8 h-8 text-blue-600" />
             </div>
             <div>
-              <h3 className="text-xl font-semibold text-gray-800">{reservation.carName}</h3>
+              <h3 className="text-xl font-semibold text-gray-800">{reservation.vehicule.marque}</h3>
               <div className="flex items-center text-gray-600 mt-1">
                 <Calendar className="w-4 h-4 mr-2" />
-                <span>{new Date(reservation.startDate).toLocaleDateString('fr-FR')} - {reservation.duration} jours</span>
+                <span>{new Date(reservation.dateDebut).toLocaleDateString('fr-FR')}{" - "}{new Date(reservation.dateFin).toLocaleDateString('fr-FR')} {" ( "}{Math.ceil(
+                  (new Date(reservation.dateFin) - new Date(reservation.dateDebut)) / (1000 * 60 * 60 * 24)
+                )} jour(s){" )"}</span>
               </div>
             </div>
           </div>
-          <div className={`px-3 py-1 rounded-full text-sm font-semibold ${reservation.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-            {reservation.status === 'active' ? (
+          <div className={`px-3 py-1 rounded-full text-sm font-semibold ${new Date(reservation.dateFin) > new Date()? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+            {new Date(reservation.dateFin) > new Date() ? (
               <span className="flex items-center">
                 <CheckCircle className="w-4 h-4 mr-1" />
                 Active
@@ -138,7 +66,7 @@ function ReservationCard({ reservation }) {
         <div className="flex justify-end items-center mt-4 pt-4 border-t border-gray-200">
           <div className="flex items-center">
             <CreditCard className="w-5 h-5 mr-2 text-gray-600" />
-            <span className="text-2xl font-bold text-gray-800">{reservation.price} DH</span>
+            <span className="text-2xl font-bold text-gray-800">{reservation.vehicule.tarif} DH</span>
           </div>
         </div>
       </div>

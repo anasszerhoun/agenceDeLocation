@@ -1,12 +1,24 @@
 package com.example.CarsRental.dto;
 
+import com.example.CarsRental.entity.Reservation;
+
 import java.util.Date;
+import java.util.List;
 
 public class clientDTO extends userDTO{
     private Date dateNaissance;
     private String cin;
     private String permisConduire;
     private String Telephone;
+    private List<reservationDTO> reservations ;
+
+    public List<reservationDTO> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<reservationDTO> reservations) {
+        this.reservations = reservations;
+    }
 
     public Date getDateNaissance() {
         return dateNaissance;
