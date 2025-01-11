@@ -11,9 +11,23 @@ import Vehicles from "./screens/vehicles/VehiclesList";
 import Admins from "./screens/admins/AdminsList";
 import AddVehicule from "./screens/vehicles/AddVehicule";
 import AddAdmin from "./screens/admins/addAdmin";
+import Login from "./screens/authentication/Login";
+import { Navigate } from "react-router-dom";
+
+
+function ProtectedRoute({ children }) {
+  const token = localStorage.getItem("token"); // Récupérer le token depuis le localStorage
+
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+}
+
 
 function App() {
   const { theme, toggleTheme } = useContext(ThemeContext);
+
   useEffect(() => {
     if (theme === "dark") {
       document.body.classList.add("dark-mode");
@@ -26,13 +40,60 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route element={<BaseLayout />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/vehicles" element={<Vehicles/>} />
-            <Route path="/vehicles/add" element={<AddVehicule mode="add"/>} />
-            <Route path="/vehicles/edit" element={<AddVehicule mode="edit"/>} />
-            <Route path="/admins" element={<Admins/>} />
-            <Route path="/admins/add" element={<AddAdmin/>} />
+          <Route path="/" element={ localStorage.getItem("token") ? 
+                        <Navigate to="/dashboard" /> : 
+                        <Navigate to="/login" />} />
+
+          <Route path="/login" element={<Login />} />
+            <Route element={<BaseLayout />}>
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/vehicles"
+              element={
+                <ProtectedRoute>
+                  <Vehicles />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/vehicles/add"
+              element={
+                <ProtectedRoute>
+                  <AddVehicule mode="add" />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/vehicles/edit"
+              element={
+                <ProtectedRoute>
+                  <AddVehicule mode="edit" />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admins"
+              element={
+                <ProtectedRoute>
+                  <Admins />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admins/add"
+              element={
+                <ProtectedRoute>
+                  <AddAdmin />
+                </ProtectedRoute>
+              }
+            />
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>
@@ -52,4 +113,5 @@ function App() {
     </>
   );
 }
+
 export default App;

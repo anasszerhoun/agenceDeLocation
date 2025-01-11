@@ -1,6 +1,8 @@
 package com.example.CarsRental.controller;
 
+import com.example.CarsRental.entity.Admin;
 import com.example.CarsRental.entity.Client;
+import com.example.CarsRental.service.adminService;
 import com.example.CarsRental.service.clientService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,6 +29,10 @@ public class AuthController {
     private clientService service;
 
     @Autowired
+    private adminService adminService;
+
+
+    @Autowired
     public AuthController(AuthenticationManager authenticationManager, JwtToken jwtToken, clientService service) {
         // this.authenticationManager = authenticationManager;
         this.jwtToken = jwtToken;
@@ -49,14 +55,6 @@ public class AuthController {
     public ResponseEntity<?> register(@RequestBody Client client) {
 
         if (service.findByEmail(client.getMail()) == null) {
-            System.out.println("Nom : " + client.getNomUser());
-            System.out.println("Prénom : " + client.getPrenomUser());
-            System.out.println("Email : " + client.getMail());
-            System.out.println("Mot de passe : " + client.getPassword());
-            System.out.println("Permis : " + client.getPermisConduire());
-            System.out.println("Numéro de Téléphone : " + client.getTelephone());
-            System.out.println("Date Naissance : " + client.getDateNaissance());
-
             service.save(client);
             return ResponseEntity.ok().body(true);
         } else {
@@ -68,10 +66,8 @@ public class AuthController {
     public ResponseEntity<String> login(@RequestParam("mail") String mail, @RequestParam("password") String password,
             HttpServletResponse response) {
         try {
-            System.out.println(mail + " " + password);
             UserDetails userDetails = userDetailsService.loadUserByUsername(mail);
 
-            System.out.println(userDetails);
             if (passwordEncoder.matches(password, userDetails.getPassword())) {
                 Authentication authentication = authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(mail, password));
@@ -90,4 +86,25 @@ public class AuthController {
             return ResponseEntity.status(401).body("Invalid username or password");
         }
     }
+    @GetMapping("/loginAdmin")
+    public ResponseEntity<String> loginAdmin(@RequestParam("mail") String email, @RequestParam("password") String password,
+                                             HttpServletResponse response) {
+        try {
+
+            Admin admin = adminService.findByEmail(email);
+
+            if (admin != null && passwordEncoder.matches(password, admin.getPassword())) {
+
+                String token = jwtToken.generateToken(email);
+
+                return ResponseEntity.ok("Token: Bearer " + token);
+            } else {
+                return ResponseEntity.status(401).body("Invalid email or password");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("An error occurred");
+        }
+    }
+
 }

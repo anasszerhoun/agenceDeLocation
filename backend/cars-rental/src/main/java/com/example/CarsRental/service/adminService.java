@@ -4,6 +4,8 @@ import com.example.CarsRental.dto.vehiculeDTO;
 import com.example.CarsRental.entity.Admin;
 
 import java.util.List;
+
+import com.example.CarsRental.entity.Client;
 import org.modelmapper.ModelMapper;
 import java.util.stream.Collectors;
 import com.example.CarsRental.dto.adminDTO;
@@ -29,4 +31,8 @@ public class adminService {
         admin = adminRepo.save(admin);
         return modelMapper.map(admin, adminDTO.class);
     }
+    public Admin findByEmail(String mail){
+        return adminRepo.findByMail(mail);
+    }
+
 }

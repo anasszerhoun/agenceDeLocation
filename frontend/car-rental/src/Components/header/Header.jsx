@@ -59,7 +59,7 @@ function Header() {
         {/* Logo */}
         <Box sx={{ display: "flex", alignItems: "center" }}>
           
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: 600, color: "white" }}>
+          <Typography  onClick={()=>{window.location.href="/home"}} variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: 600, color: "white",cursor:"pointer" }}>
             Car Rental
           </Typography>
         </Box>
@@ -82,18 +82,13 @@ function Header() {
             </>
           ) : (
             <Button
-              variant="contained"
-              color="secondary"
               onClick={seConnecter}
               sx={{
+                color: "#fff",
                 textTransform: "none",
                 fontWeight: 500,
                 padding: "8px 16px",
                 fontSize: "1rem",
-                backgroundColor: "#FF4081", // Couleur personnalisée du bouton
-                '&:hover': {
-                  backgroundColor: "#F50057", // Couleur au survol
-                },
               }}
             >
               Se connecter

@@ -76,7 +76,6 @@ public class Controller {
         Optional<Vehicule> vehicule = service.findById(dispo.getId());
 
         if (!vehicule.isPresent()) {
-            System.out.println("Hellooooooooo");
             return ResponseEntity.badRequest().body("false");
         }
 
@@ -117,7 +116,10 @@ public class Controller {
 
         String username = getAuthenticatedUsername();
         Client client = clientSer.findByEmail(username);
-        client.getReservations().add(reservation);
+
+        reservation.setClient(client);
+        //client.getReservations().add(reservation);
+
 
         reservationServ.save(reservation);
         clientSer.save(client);
@@ -136,7 +138,6 @@ public class Controller {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonResponse = objectMapper.writeValueAsString(vehicules);
 
-        System.out.println(jsonResponse);
 
         return ResponseEntity.ok(jsonResponse);
     }
@@ -154,7 +155,6 @@ public class Controller {
             clientSer.save(client);
         }
 
-        System.out.println("Favoris ajouter");
         return true;
     };
 
@@ -171,7 +171,6 @@ public class Controller {
             clientSer.save(client);
         }
 
-        System.out.println("Favoris Delete");
         return true;
     };
 

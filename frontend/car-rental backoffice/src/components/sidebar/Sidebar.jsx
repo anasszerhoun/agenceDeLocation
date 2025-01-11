@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { IoCarSport } from "react-icons/io5";
 import { SidebarContext } from "../../context/SidebarContext";
 
-const Sidebar = ({currentPath}) => {
+const Sidebar = ({ currentPath }) => {
   const { isSidebarOpen, closeSidebar } = useContext(SidebarContext);
   const navbarRef = useRef(null);
   const handleClickOutside = (event) => {
@@ -29,7 +29,15 @@ const Sidebar = ({currentPath}) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
+  }, []);
+
+  if (currentPath === "/Login") {
+    return null;
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+  }
 
   return (
     <nav
@@ -72,7 +80,9 @@ const Sidebar = ({currentPath}) => {
               </Link>
             </li>
             <li className="menu-item">
-              <Link to="/" className={currentPath === '/logout' ? 'menu-link active' : 'menu-link'}>
+              <Link to="/Login" onClick={() => {
+                handleLogout();
+              }} className={currentPath === '/logout' ? 'menu-link active' : 'menu-link'}>
                 <span className="menu-link-icon">
                   <MdOutlineLogout size={20} />
                 </span>
