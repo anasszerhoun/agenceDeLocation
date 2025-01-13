@@ -9,13 +9,12 @@ import {
   Settings as TransmissionIcon,
 
 } from "@mui/icons-material";
+import Contract from './Contract';
 import { Button, Alert } from '@mui/material';
 import Facture from "./Reservation/Facture";
 import axios from "axios"
 
 const Reservation = () => {
-
-  localStorage.setItem("ReservationAdded", "false");
   const selectedCar = JSON.parse(localStorage.getItem("selectedCar"));
 
   const [reservation, setReservation] = useState({
@@ -38,8 +37,6 @@ const Reservation = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [alert, setAlert] = useState(false);
-  const [alert2, setAlert2] = useState(false);
-
 
 
   var cont = false;
@@ -58,6 +55,13 @@ const Reservation = () => {
     }
   })
 
+
+  const handleConfirmPayment = () => {
+    selectedCar.dateRange = { from: startDate, to: endDate };
+    localStorage.setItem("selectedCar", JSON.stringify(selectedCar));
+    window.location.href = "/payment";
+  };
+
   const handleCancelReservation = () => {
     console.log("Réservation annulée", reservation.id);
   };
@@ -65,16 +69,6 @@ const Reservation = () => {
 
   const handleCheckDispo = async () => {
 
-    const today = new Date(); // Date actuelle
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-
-    
-    if ((start <= today) || (end <= start)) {
-      setAlert2(true);
-      setShowFacture(false);
-      return;
-    }
 
     const dispo = {
       id: reservation.idVehicule,
@@ -101,36 +95,8 @@ const Reservation = () => {
     } catch (error) {
       console.log(error)
     }
+
   };
-
-
-  const handlePayment = async () => {
-    selectedCar.dateRange = { from: startDate, to: endDate };
-    localStorage.setItem("selectedCar", JSON.stringify(selectedCar));
-
-
-    const token = localStorage.getItem("token");
-    try {
-      // Envoyer 'amount' en tant que paramètre de la requête
-      const response = await axios.post(
-        `http://localhost:8080/paypal/pay?amount=50.0`, // Paramètre de requête
-        {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          }
-        }
-      );
-
-      if (response.data && response.data.approvalUrl) {
-        window.location.href = response.data.approvalUrl;
-      } else {
-        console.log("Erreur lors de la création du paiement.");
-      }
-    } catch (error) {
-      console.error("Erreur lors de la requête de paiement : ", error);
-    }
-  };
-
 
   return (
     <div className="min-h-screen mt-3 bg-gradient-to-br from-gray-50 to-gray-100 p-8 flex items-center justify-center">
@@ -158,6 +124,8 @@ const Reservation = () => {
                   className="w-full h-96 object-cover transition-transform duration-500 ease-in-out transform hover:scale-105"
                 />
               </div>
+
+              
             </div>
 
             <div className="grid grid-cols-3 gap-4">
@@ -203,10 +171,6 @@ const Reservation = () => {
                   onChange={(e) => setEndDate(e.target.value)}
                   className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-                {alert2 && <Alert severity="error" sx={{ marginTop: 2 }}>
-                  Veuillez choisir des dates valides
-                </Alert>
-                }
                 {alert && <Alert severity="error" sx={{ marginTop: 2 }}>
                   Voiture n'est pas disponible dans la date choisi veuillez choisir une autre date
                 </Alert>
@@ -235,7 +199,7 @@ const Reservation = () => {
                   </div>
                 </div>
                 <button
-                  onClick={handlePayment}
+                  onClick={handleConfirmPayment}
                   className="w-full mt-4 px-6 py-4 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors duration-300 flex items-center justify-center space-x-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 shadow-lg"
                 >
                   <CreditCardIcon />
@@ -274,11 +238,7 @@ const Reservation = () => {
                 >
                   Réservation est bien ajoutée
                 </Alert>
-                <button
-                  className="px-6 mt-5 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition duration-300"
-                >
-                  Télécharger le contrat
-                </button>
+                <Contract />
               </div>
             </div>
           }

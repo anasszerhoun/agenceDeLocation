@@ -1,6 +1,8 @@
 import Input from "../UI/Input";
+import {Alert} from '@mui/material'
 
-const PersonalForm = ({ formData, handleInputChange, errors }) => {
+
+const PersonalForm = ({ formData, handleInputChange, errors ,alert}) => {
   return (
     <div>
       <Input
@@ -40,6 +42,10 @@ const PersonalForm = ({ formData, handleInputChange, errors }) => {
         onChange={handleInputChange}
         error={errors.numTelephone}
       />
+      {alert && <Alert severity="error" sx={{ marginTop: 2 }}>
+                  Nom d'utilisateur déjà 
+                </Alert>
+      }
     </div>
   );
 };

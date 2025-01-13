@@ -1,6 +1,8 @@
 import Input from "../UI/Input";
+import {Alert} from '@mui/material'
 
-const AddressForm = ({ formData, handleInputChange, errors }) => {
+
+const AddressForm = ({ formData, handleInputChange, errors,alert }) => {
   return (
     <div>
       <Input
@@ -41,6 +43,7 @@ const AddressForm = ({ formData, handleInputChange, errors }) => {
         onChange={handleInputChange}
         error={errors.confirmPassword}
       />
+      
     </div>
   );
 };

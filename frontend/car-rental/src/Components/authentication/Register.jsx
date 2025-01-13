@@ -9,10 +9,13 @@ import ProgressBar from "./UI/ProgressBar";
 import Tabs from "./UI/Tabs";
 import { apiRequest } from "../../apiRequest";
 import axios from "axios";
+import {  Alert } from '@mui/material';
+
 
 const STEPS = ["Personal Information", "Additional Details", "Confirmation"];
 const STORAGE_KEY = "multistepFormData";
 const STEP_KEY = "multistepFormStep";
+
 
 function Register() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -38,6 +41,8 @@ function Register() {
         };
   });
   const [errors, setErrors] = useState({});
+  const [alert, setAlert] = useState(false);
+
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
@@ -114,14 +119,12 @@ function Register() {
   };
 
   const handleNext = () => {
-    // Get the required fields for the current step
     const currentFields =
       currentStep === 0
         ? ["nomUser", "prenomUser", "dateNaissance", "address", "numTelephone"]
         : ["cin", "permisConduire", "mail", "password", "confirmPassword"];
 
 
-    // Validate all current step fields
     const newErrors = {};
     currentFields.forEach((field) => {
       if (!formData[field]?.trim()) {
@@ -153,7 +156,8 @@ function Register() {
       window.location.href="/login";
     }
     else{
-      console.log("error");
+        console.log("User deja existe")
+        setAlert(true);
     }
   };
 
@@ -165,7 +169,7 @@ function Register() {
 
       setTimeout(() => {
         toast.success("Form submitted successfully!");
-
+  
         setFormData({
           nomUser: "",
           prenomUser: "",
@@ -178,6 +182,7 @@ function Register() {
           password: "",
           confirmPassword: "",
         });
+    
         setCurrentStep(0);
         localStorage.removeItem(STORAGE_KEY);
         localStorage.removeItem(STEP_KEY);
@@ -197,6 +202,8 @@ function Register() {
             formData={formData}
             handleInputChange={handleInputChange}
             errors={errors}
+            alert={alert}
+
           />
         );
       case 1:

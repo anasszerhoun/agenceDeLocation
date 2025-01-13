@@ -9,6 +9,7 @@ import Register from "./Components/authentication/Register";
 import Home from "./Components/Home/Home";
 import CarPreview from "./Components/Home/CarPreview";
 import CheckoutPage from "./Components/Payment/CheckoutPage";
+import Success from "./Components/Payment/Success";
 
 import Header from "./Components/header/Header";
 import {
@@ -28,6 +29,7 @@ function App() {
       path: "/",
       element: (
         <div>
+          <Header />
           <Home />
         </div>
       ),
@@ -86,6 +88,16 @@ function App() {
     },{
       path:"/addCar",
       element:<AddVehicule />
+    },{
+      path:"/success",
+      element:(
+        isAuthenticated() ? 
+        <div>
+          <Header />
+          <Success />
+        </div>
+       : <Navigate to="/login" />
+      )
     }
   ]);
 
