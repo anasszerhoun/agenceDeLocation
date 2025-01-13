@@ -9,19 +9,20 @@ import {
   Settings as TransmissionIcon,
 
 } from "@mui/icons-material";
-import Contract from './Contract';
 import { Button, Alert } from '@mui/material';
 import Facture from "./Reservation/Facture";
 import axios from "axios"
 
 const Reservation = () => {
+
+  localStorage.setItem("ReservationAdded","false"); 
   const selectedCar = JSON.parse(localStorage.getItem("selectedCar"));
 
   const [reservation, setReservation] = useState({
     idVehicule: selectedCar.idVehicule,
     carModel: selectedCar.modele,
     carMarque: selectedCar.marque,
-    images: selectedCar.imageUrl,
+    images: ["/img1.jpeg", "/img2.jpeg", "/img3.jpeg"],
     dateRange: { from: new Date(2025, 1, 17), to: new Date(2025, 1, 23) },
     price: selectedCar.tarif,
     details: {
@@ -55,20 +56,12 @@ const Reservation = () => {
     }
   })
 
-
-  const handleConfirmPayment = () => {
-    selectedCar.dateRange = { from: startDate, to: endDate };
-    localStorage.setItem("selectedCar", JSON.stringify(selectedCar));
-    window.location.href = "/payment";
-  };
-
   const handleCancelReservation = () => {
     console.log("Réservation annulée", reservation.id);
   };
 
 
   const handleCheckDispo = async () => {
-
 
     const dispo = {
       id: reservation.idVehicule,
@@ -95,8 +88,36 @@ const Reservation = () => {
     } catch (error) {
       console.log(error)
     }
-
   };
+
+
+  const handlePayment = async () => {
+    selectedCar.dateRange = { from: startDate, to: endDate };
+    localStorage.setItem("selectedCar", JSON.stringify(selectedCar));
+
+
+    const token = localStorage.getItem("token");
+    try {
+      // Envoyer 'amount' en tant que paramètre de la requête
+      const response = await axios.post(
+        `http://localhost:8080/paypal/pay?amount=50.0`, // Paramètre de requête
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          }
+        }
+      );
+
+      if (response.data && response.data.approvalUrl) {
+        window.location.href = response.data.approvalUrl;
+      } else {
+        console.log("Erreur lors de la création du paiement.");
+      }
+    } catch (error) {
+      console.error("Erreur lors de la requête de paiement : ", error);
+    }
+  };
+
 
   return (
     <div className="min-h-screen mt-3 bg-gradient-to-br from-gray-50 to-gray-100 p-8 flex items-center justify-center">
@@ -119,13 +140,28 @@ const Reservation = () => {
             <div className="mb-8">
               <div className="relative rounded-2xl overflow-hidden shadow-lg">
                 <img
-                  src={reservation.images}
+                  src={reservation.images[currentImageIndex]}
                   alt={`Car ${currentImageIndex + 1}`}
                   className="w-full h-96 object-cover transition-transform duration-500 ease-in-out transform hover:scale-105"
                 />
               </div>
 
-              
+              <div className="flex space-x-2 mt-4 overflow-x-auto pb-2">
+                {reservation.images.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 focus:outline-none ${index === currentImageIndex ? "ring-2 ring-blue-500" : ""
+                      }`}
+                  >
+                    <img
+                      src={image}
+                      alt={`Thumbnail ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
             </div>
 
             <div className="grid grid-cols-3 gap-4">
@@ -199,7 +235,7 @@ const Reservation = () => {
                   </div>
                 </div>
                 <button
-                  onClick={handleConfirmPayment}
+                  onClick={handlePayment}
                   className="w-full mt-4 px-6 py-4 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors duration-300 flex items-center justify-center space-x-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 shadow-lg"
                 >
                   <CreditCardIcon />
@@ -238,7 +274,11 @@ const Reservation = () => {
                 >
                   Réservation est bien ajoutée
                 </Alert>
-                <Contract />
+                <button
+                  className="px-6 mt-5 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition duration-300"
+                >
+                  Télécharger le contrat
+                </button>
               </div>
             </div>
           }

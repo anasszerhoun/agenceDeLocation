@@ -9,6 +9,7 @@ import Register from "./Components/authentication/Register";
 import Home from "./Components/Home/Home";
 import CarPreview from "./Components/Home/CarPreview";
 import CheckoutPage from "./Components/Payment/CheckoutPage";
+import Success from "./Components/Payment/Success";
 
 import Header from "./Components/header/Header";
 import {
@@ -34,7 +35,14 @@ function App() {
     },
     {
       path: "/profile",
-      element: isAuthenticated() ? <><Header/><UserProfile /></> : <Navigate to="/login" />, // Rediriger si non authentifié
+      element: isAuthenticated() ? (
+        <>
+          <Header />
+          <UserProfile />
+        </>
+      ) : (
+        <Navigate to="/login" />
+      ), // Rediriger si non authentifié
     },
     {
       path: "/reservation",
@@ -62,31 +70,43 @@ function App() {
           <Header />
           <Home />
         </div>
-      )
+      ),
     },
     {
       path: "/carPreview",
-      element:  ( 
-              <div>
-                <Header />
-                <CarPreview />
-              </div>
-            )
+      element: (
+        <div>
+          <Header />
+          <CarPreview />
+        </div>
+      ),
     },
     {
       path: "/payment",
-      element: (
-          isAuthenticated() ? 
+      element: isAuthenticated() ? (
         <div>
           <Header />
           <CheckoutPage />
         </div>
-       : <Navigate to="/login" />
+      ) : (
+        <Navigate to="/login" />
       ),
-    },{
-      path:"/addCar",
-      element:<AddVehicule />
-    }
+    },
+    {
+      path: "/addCar",
+      element: <AddVehicule />,
+    },
+    {
+      path: "success",
+      element: isAuthenticated() ? (
+        <div>
+          <Header />
+          <Success />
+        </div>
+      ) : (
+        <Navigate to="/login" />
+      ),
+    },
   ]);
 
   return (
